@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Newsreader", Georgia, serif;
+  --font-sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", "Courier New", Courier, monospace;
+
+  --color-ridge-moss: #3F4A3C;
+  --color-deep-ink: #141E13;
+  --color-ink-black: #1A1A1A;
+  --color-muted-bone: #F2F0EB;
+  --color-summit-white: #FCFCFA;
+  --color-hairline: #E5E5E5;
+  --color-hairline-dark: #C4C8C0;
+  --color-surface-dim: #DADAD8;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    background-color: #f9f9f7;
+    color: #1a1c1b;
+    letter-spacing: -0.01em;
+  }
+
+  h1, h2, h3, .font-editorial {
+    font-family: var(--font-serif);
+  }
+
+  .font-mono-data {
+    font-family: var(--font-mono);
+  }
+}
+
+/* Custom scrollbars for clean minimal aesthetic */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f2f0eb;
+}
+::-webkit-scrollbar-thumb {
+  background: #c4c8c0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3f4a3c;
+}
+

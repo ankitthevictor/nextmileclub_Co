@@ -1,0 +1,6 @@
+{
+  "name": "Next Mile Club - Summit Protocol",
+  "description": "Strategic quietude for the architectural mind. High-altitude retreat cohort in the Kumaon Himalayas.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
