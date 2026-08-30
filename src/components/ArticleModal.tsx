@@ -78,7 +78,7 @@ export const ArticleModal: React.FC<ArticleModalProps> = ({ article, onClose }) 
 
         {/* Article Footer */}
         <div className="mt-12 pt-6 border-t border-[#e5e5e5] flex items-center justify-between text-xs font-mono text-[#5f5e5e]">
-          <span>NEXT MILE CLUB ARCHIVE // KUMAON HIMALAYAS</span>
+          <span>NEXT MILE CLUB ARCHIVE // NEAR BANGALORE</span>
           <button
             onClick={onClose}
             className="px-4 py-2 bg-[#141e13] text-[#fcfcfa] uppercase tracking-wider text-[11px]"

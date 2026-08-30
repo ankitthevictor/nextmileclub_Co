@@ -1,6 +1,6 @@
 import React from 'react';
-import { CONVENER_INFO, RETREAT_META } from '../data/retreatData';
-import { ArrowRight } from 'lucide-react';
+import { CONVENER_INFO } from '../data/retreatData';
+import { ArrowRight, Quote, HeartHandshake, ShieldCheck, Sparkles } from 'lucide-react';
 
 interface ConvenerSectionProps {
   onOpenBioModal: () => void;
@@ -14,39 +14,43 @@ export const ConvenerSection: React.FC<ConvenerSectionProps> = ({ onOpenBioModal
     >
       <div className="max-w-[1280px] mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Left Column: Convener Editorial Narrative */}
-          <div className="lg:col-span-6 flex flex-col justify-center order-2 lg:order-1">
+          {/* Left Column: Convener Story & Mission */}
+          <div className="lg:col-span-7 flex flex-col justify-center">
             <span
               id="convener-section-label"
-              className="text-[#5f5e5e] text-[11px] md:text-[12px] font-semibold tracking-[0.15em] uppercase font-sans mb-3"
+              className="text-[#3f4a3c] text-[11px] md:text-[12px] font-semibold tracking-[0.2em] uppercase font-mono mb-3"
             >
-              SECTION 02 / THE CONVENER
+              SECTION 02 / THE CONVENER & THE ORIGIN
             </span>
 
             <h2
               id="convener-name-headline"
-              className="text-[#1a1c1b] font-serif text-[42px] sm:text-[52px] md:text-[56px] font-normal leading-[1.08] tracking-[-0.015em] mb-6"
+              className="text-[#1a1c1b] font-serif text-[40px] sm:text-[50px] md:text-[56px] font-normal leading-[1.08] tracking-[-0.015em] mb-4"
             >
               {CONVENER_INFO.name}
             </h2>
 
-            <div className="space-y-4 max-w-xl">
-              <p
-                id="convener-short-bio"
-                className="text-[#1a1c1b] font-sans text-base sm:text-lg leading-[1.65] font-normal text-[#2f3130]"
-              >
+            <p className="text-xs sm:text-sm font-mono text-[#5f5e5e] mb-6 tracking-wide">
+              {CONVENER_INFO.background}
+            </p>
+
+            <div className="space-y-5 text-[#2f3130] font-sans text-base sm:text-lg leading-[1.7] font-normal">
+              <p id="convener-short-bio">
                 {CONVENER_INFO.shortBio}
+              </p>
+              <p className="text-sm sm:text-base text-[#5f5e5e]">
+                Next Mile Club is that idea made deliberate: a quiet retreat near Bangalore where women who lead can put down the weight of constant execution, speak openly with true peers, and design their next chapter with clarity and conviction.
               </p>
             </div>
 
-            {/* Read Full Bio Action Link */}
-            <div className="mt-8 pt-4">
+            {/* Read Full Story Action Link */}
+            <div className="mt-8 pt-2">
               <button
                 id="convener-read-full-bio-btn"
                 onClick={onOpenBioModal}
-                className="group inline-flex items-center gap-2.5 text-[12px] font-semibold tracking-[0.15em] uppercase font-sans text-[#141e13] hover:text-[#3f4a3c] transition-colors pb-1 border-b border-[#141e13]"
+                className="group inline-flex items-center gap-2.5 text-[12px] font-semibold tracking-[0.15em] uppercase font-mono text-[#141e13] hover:text-[#3f4a3c] transition-colors pb-1 border-b border-[#141e13]"
               >
-                <span>READ FULL BIO</span>
+                <span>READ HER FULL STORY</span>
                 <ArrowRight
                   size={14}
                   className="transition-transform duration-200 group-hover:translate-x-1"
@@ -55,32 +59,22 @@ export const ConvenerSection: React.FC<ConvenerSectionProps> = ({ onOpenBioModal
             </div>
           </div>
 
-          {/* Right Column: Architectural Cantilever Photography in Mat Frame */}
-          <div className="lg:col-span-6 flex justify-center lg:justify-end order-1 lg:order-2">
+          {/* Right Column: Refined Editorial Quote & Manifesto Card */}
+          <div className="lg:col-span-5 flex flex-col justify-center">
             <div
-              id="convener-image-frame"
-              className="w-full max-w-[480px] bg-[#f2f0eb] p-4 sm:p-6 border border-[#e5e5e5] shadow-[0_1px_3px_rgba(0,0,0,0.03)]"
+              id="convener-quote-card"
+              className="w-full bg-[#f2f0eb] p-8 sm:p-10 border border-[#141e13] shadow-[0_2px_12px_rgba(0,0,0,0.04)] relative"
               style={{ borderRadius: 0 }}
             >
-              {/* Inner White Matte Frame */}
-              <div className="bg-[#ffffff] p-3 sm:p-4 border border-[#e8e8e6]">
-                <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#293327]/10">
-                  <img
-                    src={RETREAT_META.images.convener}
-                    alt="The Architecture of Silence - Next Mile Club Sanctuary"
-                    className="w-full h-full object-cover object-center filter grayscale contrast-[1.12] brightness-[0.98]"
-                    referrerPolicy="no-referrer"
-                    loading="lazy"
-                  />
-                  {/* Subtle Grain & Vignette Effect */}
-                  <div className="absolute inset-0 ring-1 ring-inset ring-black/10 pointer-events-none" />
-                </div>
-              </div>
+              <Quote size={32} className="text-[#3f4a3c] opacity-40 mb-4" />
 
-              {/* Minimal Caption Label */}
-              <div className="mt-3 flex items-center justify-between text-[10px] font-mono text-[#5f5e5e] px-1">
-                <span>MUKTESHWAR CANTILEVER (7,200 FT)</span>
-                <span>MONOGRAPH II ARCHIVE</span>
+              <blockquote className="font-serif text-lg sm:text-xl md:text-[22px] text-[#1a1c1b] leading-relaxed italic mb-6">
+                &ldquo;{CONVENER_INFO.quote}&rdquo;
+              </blockquote>
+
+              <div className="pt-6 border-t border-[#c4c8c0] flex items-center justify-between text-xs font-mono text-[#5f5e5e]">
+                <span className="font-semibold text-[#1a1c1b]">AKANKSHA SHARMA</span>
+                <span className="text-[#3f4a3c]">CONVENER NOTE</span>
               </div>
             </div>
           </div>

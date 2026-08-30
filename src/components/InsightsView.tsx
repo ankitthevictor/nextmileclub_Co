@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { INSIGHTS_DATA } from '../data/retreatData';
 import { InsightArticle } from '../types';
-import { BookOpen, ArrowRight, Clock } from 'lucide-react';
+import { ArrowRight, Clock, Heart } from 'lucide-react';
 
 interface InsightsViewProps {
   onSelectArticle: (article: InsightArticle) => void;
@@ -14,15 +14,15 @@ export const InsightsView: React.FC<InsightsViewProps> = ({ onSelectArticle }) =
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 pb-6 border-b border-[#e5e5e5] gap-6">
           <div>
-            <span className="text-[#5f5e5e] text-[11px] md:text-[12px] font-semibold tracking-[0.15em] uppercase font-sans mb-3 block">
-              MONOGRAPHS & ESSAYS
+            <span className="text-[#3f4a3c] text-[11px] md:text-[12px] font-semibold tracking-[0.2em] uppercase font-mono mb-3 block">
+              ESSAYS & REFLECTIONS
             </span>
             <h2 className="text-[#1a1c1b] font-serif text-[38px] sm:text-[46px] md:text-[50px] font-normal leading-[1.1] tracking-[-0.015em]">
-              Architectural Inquiries
+              Stories & Perspectives
             </h2>
           </div>
           <p className="text-sm text-[#5f5e5e] font-mono max-w-sm">
-            Curated papers distilled from previous Himalayan summit discourses and fellow research.
+            Honest reflections on leadership, ambition, sisterhood, and the courage to choose what comes next.
           </p>
         </div>
 
@@ -64,7 +64,7 @@ export const InsightsView: React.FC<InsightsViewProps> = ({ onSelectArticle }) =
                 </div>
 
                 <span className="inline-flex items-center gap-1 text-xs font-mono text-[#141e13] group-hover:translate-x-1 transition-transform">
-                  <span>Read</span>
+                  <span>Read Story</span>
                   <ArrowRight size={13} />
                 </span>
               </div>

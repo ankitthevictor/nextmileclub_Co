@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { RETREAT_META, ITINERARY_DATA } from '../data/retreatData';
-import { ChevronDown, ChevronUp, MapPin, Calendar, Users, ShieldAlert, Mountain, Clock } from 'lucide-react';
+import { ChevronDown, ChevronUp, MapPin, Calendar, Users, Shield, Mountain, Clock, Sparkles } from 'lucide-react';
 
 interface ProtocolSectionProps {
   onRequestInvitation: () => void;
@@ -20,25 +20,25 @@ export const ProtocolSection: React.FC<ProtocolSectionProps> = ({ onRequestInvit
     {
       label: 'DATES',
       value: RETREAT_META.dates,
-      subValue: 'Autumn Equinox Convening (3 Days / 2 Nights)',
+      subValue: 'Two unhurried days at a private countryside estate',
       icon: Calendar,
     },
     {
       label: 'COHORT SIZE',
       value: RETREAT_META.cohortSize,
-      subValue: 'Curated across Enterprise, AI, Deep Systems & Capital',
+      subValue: '14–18 handpicked women in senior leadership',
       icon: Users,
     },
     {
-      label: 'CHATHAM COVENANT',
+      label: 'TRUST COVENANT',
       value: 'Strict Chatham House Rule',
-      subValue: 'No recordings, zero social disclosures, zero pitch decks',
-      icon: ShieldAlert,
+      subValue: 'A safe space: no recordings, no posturing, pure honesty',
+      icon: Shield,
     },
     {
-      label: 'CONNECTIVITY',
-      value: 'Analog Sanctuary',
-      subValue: 'Digital lockboxes provided upon arrival • Emergency satellite dispatch available',
+      label: 'SETTING',
+      value: 'Quiet Countryside Estate',
+      subValue: 'Near Bangalore • Space to step away from screens & breathe deeply',
       icon: Mountain,
     },
   ];
@@ -49,26 +49,26 @@ export const ProtocolSection: React.FC<ProtocolSectionProps> = ({ onRequestInvit
       className="w-full py-20 md:py-28 lg:py-36 bg-[#f9f9f7] border-b border-[#e5e5e5]"
     >
       <div className="max-w-[1280px] mx-auto px-6 md:px-12">
-        {/* Main 2-Column Split matching the exact screenshot */}
+        {/* Main 2-Column Split */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          {/* Left Column: Section 03 / The Details & Summit Protocol Title */}
+          {/* Left Column */}
           <div className="lg:col-span-5 flex flex-col justify-start">
             <span
               id="details-section-label"
-              className="text-[#5f5e5e] text-[11px] md:text-[12px] font-semibold tracking-[0.15em] uppercase font-sans mb-3"
+              className="text-[#3f4a3c] text-[11px] md:text-[12px] font-semibold tracking-[0.2em] uppercase font-mono mb-3"
             >
-              SECTION 03 / THE DETAILS
+              SECTION 03 / THE RETREAT DETAILS
             </span>
 
             <h2
               id="protocol-section-headline"
               className="text-[#1a1c1b] font-serif text-[40px] sm:text-[48px] md:text-[52px] font-normal leading-[1.1] tracking-[-0.015em]"
             >
-              Summit Protocol
+              The Rhythm of the Retreat
             </h2>
 
             <p className="mt-4 text-[#444842] text-sm sm:text-base leading-relaxed max-w-md">
-              A high-altitude framework designed to dismantle performative velocity and reconstruct foundational clarity.
+              Two unhurried days near Bangalore designed to replace constant reactive busyness with deep clarity, honest peer conversations, and meaningful reflection.
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row items-start gap-4">
@@ -78,7 +78,7 @@ export const ProtocolSection: React.FC<ProtocolSectionProps> = ({ onRequestInvit
                 className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#eeeeec] hover:bg-[#e2e3e1] text-[#141e13] text-xs font-mono tracking-wider uppercase transition-colors"
                 style={{ borderRadius: 0 }}
               >
-                <span>{showFullItinerary ? 'Close Full Itinerary' : 'Inspect 72-Hour Itinerary'}</span>
+                <span>{showFullItinerary ? 'Close Daily Cadence' : 'View Retreat Itinerary'}</span>
                 {showFullItinerary ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
               </button>
 
@@ -87,7 +87,7 @@ export const ProtocolSection: React.FC<ProtocolSectionProps> = ({ onRequestInvit
                 onClick={onRequestInvitation}
                 className="text-xs font-mono tracking-wider uppercase text-[#141e13] hover:text-[#3f4a3c] py-2.5 px-2 border-b border-[#141e13]"
               >
-                Request Cohort Seat →
+                Request An Invitation →
               </button>
             </div>
           </div>
@@ -104,14 +104,14 @@ export const ProtocolSection: React.FC<ProtocolSectionProps> = ({ onRequestInvit
                   id={`protocol-row-${item.label.toLowerCase().replace(/\s+/g, '-')}`}
                   className="py-5 sm:py-6 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 sm:gap-6 hover:bg-[#f4f4f2]/60 transition-colors px-2"
                 >
-                  {/* Left Key in label-caps */}
+                  {/* Left Key */}
                   <div className="sm:w-1/3">
                     <span className="text-[12px] font-medium tracking-[0.12em] uppercase font-sans text-[#5f5e5e]">
                       {item.label}
                     </span>
                   </div>
 
-                  {/* Right Value in mono-data */}
+                  {/* Right Value */}
                   <div className="sm:w-2/3 flex flex-col sm:items-end text-left sm:text-right">
                     <span className="text-[15px] sm:text-[16px] font-mono text-[#1a1c1b] tracking-normal font-normal">
                       {item.value}
@@ -135,10 +135,10 @@ export const ProtocolSection: React.FC<ProtocolSectionProps> = ({ onRequestInvit
             <div className="flex flex-col md:flex-row md:items-center justify-between pb-8 border-b border-[#e5e5e5] gap-4">
               <div>
                 <span className="text-[11px] font-mono tracking-widest uppercase text-[#3f4a3c]">
-                  72-HOUR CHRONOLOGY
+                  RETREAT CHRONOLOGY
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-serif text-[#1a1c1b] mt-1">
-                  The Daily Cadence of Strategic Quietude
+                  The Daily Cadence of Clarity
                 </h3>
               </div>
 
@@ -161,41 +161,40 @@ export const ProtocolSection: React.FC<ProtocolSectionProps> = ({ onRequestInvit
               </div>
             </div>
 
-            {/* Active Day Content */}
-            <div className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-              <div className="lg:col-span-4 bg-[#f2f0eb] p-6 border border-[#e5e5e5]">
-                <span className="text-xs font-mono uppercase text-[#3f4a3c] tracking-wider">
+            {/* Active Day Details */}
+            <div className="mt-8">
+              <div className="mb-6">
+                <span className="text-xs font-mono uppercase tracking-wider text-[#3f4a3c]">
                   {ITINERARY_DATA[activeItineraryDay].date}
                 </span>
-                <h4 className="text-2xl font-serif text-[#1a1c1b] mt-2 mb-2">
+                <h4 className="text-xl sm:text-2xl font-serif text-[#1a1c1b] mt-1">
                   {ITINERARY_DATA[activeItineraryDay].title}
                 </h4>
-                <p className="text-sm text-[#444842] leading-relaxed">
+                <p className="text-sm text-[#5f5e5e] mt-1">
                   {ITINERARY_DATA[activeItineraryDay].subtitle}
                 </p>
               </div>
 
-              <div className="lg:col-span-8 space-y-4">
+              <div className="space-y-4">
                 {ITINERARY_DATA[activeItineraryDay].schedule.map((item, idx) => (
                   <div
                     key={idx}
-                    className="p-5 bg-[#ffffff] border border-[#e5e5e5] hover:border-[#3f4a3c] transition-colors"
+                    className="p-4 sm:p-6 bg-[#ffffff] border border-[#e5e5e5] hover:border-[#141e13] transition-colors flex flex-col sm:flex-row gap-4 sm:gap-8 items-start"
                   >
-                    <div className="flex items-center justify-between gap-4 mb-2">
-                      <span className="inline-flex items-center gap-1.5 text-xs font-mono text-[#3f4a3c] font-medium">
-                        <Clock size={13} />
+                    <div className="sm:w-28 flex-shrink-0">
+                      <span className="text-xs sm:text-sm font-mono font-medium text-[#141e13] bg-[#eeeeec] px-2.5 py-1 inline-flex items-center gap-1.5">
+                        <Clock size={12} className="text-[#3f4a3c]" />
                         {item.time}
                       </span>
-                      <span className="text-[10px] font-mono uppercase tracking-widest px-2 py-0.5 bg-[#eeeeec] text-[#5f5e5e]">
-                        {item.type}
-                      </span>
                     </div>
-                    <h5 className="text-base font-sans font-medium text-[#1a1c1b] mb-1">
-                      {item.label}
-                    </h5>
-                    <p className="text-sm text-[#444842] leading-relaxed">
-                      {item.description}
-                    </p>
+                    <div className="flex-1">
+                      <h5 className="font-serif text-base sm:text-lg text-[#1a1c1b] font-medium">
+                        {item.label}
+                      </h5>
+                      <p className="text-xs sm:text-sm text-[#444842] mt-1 leading-relaxed">
+                        {item.description}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>

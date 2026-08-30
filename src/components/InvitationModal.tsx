@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { InvitationApplication } from '../types';
-import { RETREAT_META } from '../data/retreatData';
-import { X, CheckCircle2, ShieldCheck, FileText, ArrowRight, ArrowLeft, Stamp, Download, Printer } from 'lucide-react';
+import { RETREAT_META, CONVENER_INFO } from '../data/retreatData';
+import { X, CheckCircle2, ShieldCheck, ArrowRight, ArrowLeft, Stamp, Printer, Mail, Linkedin, ExternalLink } from 'lucide-react';
 
 interface InvitationModalProps {
   isOpen: boolean;
@@ -15,25 +15,18 @@ export const InvitationModal: React.FC<InvitationModalProps> = ({ isOpen, onClos
     email: '',
     organization: '',
     role: '',
-    domain: 'Enterprise Architecture',
+    linkedinUrl: '',
     bandwidthQuestion: '',
-    solitudeStatement: '',
+    lookingFor: '',
+    topPriorities: '',
     agreedChathamHouse: false,
-    agreedDigitalDisconnect: false,
-    edition: 'October 24–26, 2024 (Kumaon Himalayas)',
+    edition: 'Dates to be announced soon',
   });
   const [dossierId, setDossierId] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [submittedTime, setSubmittedTime] = useState<string>('');
 
   if (!isOpen) return null;
-
-  const domains = [
-    'Enterprise Architecture',
-    'AI Infrastructure',
-    'Capital Systems',
-    'Deep Systems',
-    'Biosystems',
-  ];
 
   const handleInputChange = (field: keyof InvitationApplication, value: any) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -44,29 +37,56 @@ export const InvitationModal: React.FC<InvitationModalProps> = ({ isOpen, onClos
     if (currentStep < 3) {
       setCurrentStep((prev) => prev + 1);
     } else {
-      // Final submission
+      // Final submission to thenextmileclub@gmail.com
       setIsSubmitting(true);
       setTimeout(() => {
-        const randomCode = `NMC-${Math.floor(1000 + Math.random() * 9000)}-${formData.domain.substring(0, 3).toUpperCase()}`;
+        const randomCode = `NMC-${Math.floor(1000 + Math.random() * 9000)}-${formData.organization ? formData.organization.replace(/[^a-zA-Z]/g, '').substring(0, 3).toUpperCase() : 'SEL'}`;
         setDossierId(randomCode);
+        setSubmittedTime(new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }));
         setIsSubmitting(false);
         setCurrentStep(4);
       }, 600);
     }
   };
 
+  // Validation rules
+  const isValidUrl = (url: string) => {
+    const trimmed = url.trim();
+    return trimmed.length > 5 && (trimmed.includes('linkedin.com') || trimmed.startsWith('http') || trimmed.includes('/in/'));
+  };
+
   const isStep1Valid =
     formData.fullName.trim() !== '' &&
     formData.email.trim() !== '' &&
     formData.organization.trim() !== '' &&
-    formData.role.trim() !== '';
+    formData.role.trim() !== '' &&
+    isValidUrl(formData.linkedinUrl);
 
   const isStep2Valid =
-    formData.bandwidthQuestion.trim().length > 20 &&
-    formData.solitudeStatement.trim().length > 10;
+    formData.bandwidthQuestion.trim().length >= 15 &&
+    formData.lookingFor.trim().length >= 10 &&
+    formData.topPriorities.trim().length >= 10;
 
-  const isStep3Valid =
-    formData.agreedChathamHouse && formData.agreedDigitalDisconnect;
+  const isStep3Valid = formData.agreedChathamHouse;
+
+  // Prepare email payload for thenextmileclub@gmail.com
+  const emailSubject = encodeURIComponent(`Next Mile Club Application - ${formData.fullName} (${formData.organization})`);
+  const emailBody = encodeURIComponent(
+    `Candidate Dossier of Intent\n` +
+    `---------------------------------------\n` +
+    `Full Name: ${formData.fullName}\n` +
+    `Email: ${formData.email}\n` +
+    `Organization: ${formData.organization}\n` +
+    `Role / Title: ${formData.role}\n` +
+    `LinkedIn Profile: ${formData.linkedinUrl}\n\n` +
+    `1. Cognitive Bandwidth & Core Problem:\n${formData.bandwidthQuestion}\n\n` +
+    `2. What You Are Looking For From This Club:\n${formData.lookingFor}\n\n` +
+    `3. Top 3 Priorities in Life Right Now:\n${formData.topPriorities}\n\n` +
+    `Edition: ${formData.edition}\n` +
+    `Chatham House Rule Agreed: Yes\n` +
+    `Target Email: ${RETREAT_META.emailDestination}\n`
+  );
+  const mailtoUrl = `mailto:${RETREAT_META.emailDestination}?subject=${emailSubject}&body=${emailBody}`;
 
   return (
     <div
@@ -98,10 +118,10 @@ export const InvitationModal: React.FC<InvitationModalProps> = ({ isOpen, onClos
             )}
           </div>
           <h3 className="font-serif text-2xl sm:text-3xl text-[#1a1c1b] mt-2">
-            {currentStep === 1 && 'Candidate Profile & Focus'}
-            {currentStep === 2 && 'The Architectural Inquiry'}
-            {currentStep === 3 && 'Sanctuary Covenant & Protocol'}
-            {currentStep === 4 && 'Dossier Registered & Sealed'}
+            {currentStep === 1 && 'Candidate Profile'}
+            {currentStep === 2 && 'Inquiry & Intent'}
+            {currentStep === 3 && 'Retreat Agreement & Privacy'}
+            {currentStep === 4 && 'Application Registered & Received'}
           </h3>
         </div>
 
@@ -109,7 +129,7 @@ export const InvitationModal: React.FC<InvitationModalProps> = ({ isOpen, onClos
         {currentStep === 1 && (
           <form onSubmit={handleNext} className="space-y-4">
             <p className="text-xs sm:text-sm text-[#444842] mb-4">
-              Attendance is strictly capped at fourteen peers. Candidates are selected based on intellectual rigor, domain depth, and capacity for unscripted inquiry.
+              Attendance is strictly capped at 14–18 peers. Candidates are selected based on depth of experience, authentic ambition, and capacity for candid peer dialogue.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -122,7 +142,7 @@ export const InvitationModal: React.FC<InvitationModalProps> = ({ isOpen, onClos
                   required
                   value={formData.fullName}
                   onChange={(e) => handleInputChange('fullName', e.target.value)}
-                  placeholder="e.g. Dr. Jennifer Morales"
+                  placeholder="Your full name"
                   className="w-full px-3.5 py-2.5 bg-[#ffffff] border border-[#c4c8c0] focus:border-[#141e13] text-sm text-[#1a1c1b] outline-none"
                   style={{ borderRadius: 0 }}
                 />
@@ -137,7 +157,7 @@ export const InvitationModal: React.FC<InvitationModalProps> = ({ isOpen, onClos
                   required
                   value={formData.email}
                   onChange={(e) => handleInputChange('email', e.target.value)}
-                  placeholder="name@organization.com"
+                  placeholder="your.email@organization.com"
                   className="w-full px-3.5 py-2.5 bg-[#ffffff] border border-[#c4c8c0] focus:border-[#141e13] text-sm text-[#1a1c1b] outline-none"
                   style={{ borderRadius: 0 }}
                 />
@@ -154,7 +174,7 @@ export const InvitationModal: React.FC<InvitationModalProps> = ({ isOpen, onClos
                   required
                   value={formData.organization}
                   onChange={(e) => handleInputChange('organization', e.target.value)}
-                  placeholder="e.g. Apex Compute Labs"
+                  placeholder="Organization or current venture"
                   className="w-full px-3.5 py-2.5 bg-[#ffffff] border border-[#c4c8c0] focus:border-[#141e13] text-sm text-[#1a1c1b] outline-none"
                   style={{ borderRadius: 0 }}
                 />
@@ -169,29 +189,35 @@ export const InvitationModal: React.FC<InvitationModalProps> = ({ isOpen, onClos
                   required
                   value={formData.role}
                   onChange={(e) => handleInputChange('role', e.target.value)}
-                  placeholder="e.g. Chief Architect / Founder"
+                  placeholder="Current leadership role or title"
                   className="w-full px-3.5 py-2.5 bg-[#ffffff] border border-[#c4c8c0] focus:border-[#141e13] text-sm text-[#1a1c1b] outline-none"
                   style={{ borderRadius: 0 }}
                 />
               </div>
             </div>
 
+            {/* Mandatory LinkedIn link field */}
             <div>
               <label className="block text-[11px] font-mono uppercase tracking-wider text-[#5f5e5e] mb-1">
-                Primary Architecture Discipline *
+                LinkedIn Profile Link * <span className="text-[#3f4a3c] font-normal lowercase">(mandatory)</span>
               </label>
-              <select
-                value={formData.domain}
-                onChange={(e) => handleInputChange('domain', e.target.value)}
-                className="w-full px-3.5 py-2.5 bg-[#ffffff] border border-[#c4c8c0] focus:border-[#141e13] text-sm text-[#1a1c1b] outline-none font-mono"
-                style={{ borderRadius: 0 }}
-              >
-                {domains.map((d) => (
-                  <option key={d} value={d}>
-                    {d}
-                  </option>
-                ))}
-              </select>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#5f5e5e]">
+                  <Linkedin size={15} />
+                </div>
+                <input
+                  type="url"
+                  required
+                  value={formData.linkedinUrl}
+                  onChange={(e) => handleInputChange('linkedinUrl', e.target.value)}
+                  placeholder="https://www.linkedin.com/in/your-profile"
+                  className="w-full pl-9 pr-3.5 py-2.5 bg-[#ffffff] border border-[#c4c8c0] focus:border-[#141e13] text-sm text-[#1a1c1b] outline-none font-mono"
+                  style={{ borderRadius: 0 }}
+                />
+              </div>
+              <span className="text-[10px] font-mono text-[#757871] mt-1 block">
+                Required for identity verification and peer cohort curation
+              </span>
             </div>
 
             <div className="pt-4 flex justify-end">
@@ -214,7 +240,7 @@ export const InvitationModal: React.FC<InvitationModalProps> = ({ isOpen, onClos
         {currentStep === 2 && (
           <form onSubmit={handleNext} className="space-y-5">
             <p className="text-xs sm:text-sm text-[#444842]">
-              At Next Mile Club, there are no presentations or sales decks. Your candidate inquiry forms the basis of your cohort discourse.
+              At Next Mile Club, there are no sales decks or pitches. Your candidate inquiry forms the basis of your cohort discourse.
             </p>
 
             <div>
@@ -226,25 +252,37 @@ export const InvitationModal: React.FC<InvitationModalProps> = ({ isOpen, onClos
                 rows={3}
                 value={formData.bandwidthQuestion}
                 onChange={(e) => handleInputChange('bandwidthQuestion', e.target.value)}
-                placeholder="Describe the underlying system paradox, technical limit, or organizational topology you are attempting to solve..."
+                placeholder="Describe the underlying challenge, strategic inflection, or organizational paradox you are navigating..."
                 className="w-full p-3 bg-[#ffffff] border border-[#c4c8c0] focus:border-[#141e13] text-sm text-[#1a1c1b] outline-none leading-relaxed"
                 style={{ borderRadius: 0 }}
               />
-              <span className="text-[10px] font-mono text-[#757871]">
-                Min 20 characters • Evaluated for first-principles rigor
-              </span>
             </div>
 
             <div>
               <label className="block text-[11px] font-mono uppercase tracking-wider text-[#5f5e5e] mb-1.5 font-semibold">
-                2. What specific question do you need 72 hours of uninterrupted Himalayan silence to resolve? *
+                2. What are you looking for from this club? *
               </label>
               <textarea
                 required
-                rows={2}
-                value={formData.solitudeStatement}
-                onChange={(e) => handleInputChange('solitudeStatement', e.target.value)}
-                placeholder="State your thesis or core interrogation in 1-2 precise sentences..."
+                rows={3}
+                value={formData.lookingFor}
+                onChange={(e) => handleInputChange('lookingFor', e.target.value)}
+                placeholder="Describe what you hope to experience, explore, or gain from this peer cohort..."
+                className="w-full p-3 bg-[#ffffff] border border-[#c4c8c0] focus:border-[#141e13] text-sm text-[#1a1c1b] outline-none leading-relaxed"
+                style={{ borderRadius: 0 }}
+              />
+            </div>
+
+            <div>
+              <label className="block text-[11px] font-mono uppercase tracking-wider text-[#5f5e5e] mb-1.5 font-semibold">
+                3. Your top 3 priorities in life right now *
+              </label>
+              <textarea
+                required
+                rows={3}
+                value={formData.topPriorities}
+                onChange={(e) => handleInputChange('topPriorities', e.target.value)}
+                placeholder="1. ...&#10;2. ...&#10;3. ..."
                 className="w-full p-3 bg-[#ffffff] border border-[#c4c8c0] focus:border-[#141e13] text-sm text-[#1a1c1b] outline-none leading-relaxed"
                 style={{ borderRadius: 0 }}
               />
@@ -276,15 +314,15 @@ export const InvitationModal: React.FC<InvitationModalProps> = ({ isOpen, onClos
           </form>
         )}
 
-        {/* Step 3: Sanctuary Covenant & Agreement */}
+        {/* Step 3: Retreat Agreement & Privacy */}
         {currentStep === 3 && (
           <form onSubmit={handleNext} className="space-y-5">
             <div className="bg-[#f2f0eb] p-4 border-l-2 border-[#141e13] space-y-3">
               <span className="text-[10px] font-mono uppercase tracking-widest text-[#3f4a3c] font-semibold block">
-                THE HIMALAYAN SANCTUARY COVENANT
+                THE RETREAT AGREEMENT
               </span>
               <p className="text-xs text-[#2f3130] leading-relaxed">
-                By entering the Next Mile Club sanctuary, all participants commit unconditionally to the elimination of performative posturing, commercial solicitation, and real-time public broadcasting.
+                By entering Next Mile Club, all participants commit to a safe, supportive space free of posturing, commercial solicitation, and social media broadcasting.
               </p>
             </div>
 
@@ -292,48 +330,43 @@ export const InvitationModal: React.FC<InvitationModalProps> = ({ isOpen, onClos
               <label className="flex items-start gap-3 cursor-pointer group">
                 <input
                   type="checkbox"
+                  required
                   checked={formData.agreedChathamHouse}
                   onChange={(e) => handleInputChange('agreedChathamHouse', e.target.checked)}
                   className="mt-1 h-4 w-4 rounded-none accent-[#141e13]"
                 />
                 <span className="text-xs sm:text-sm text-[#1a1c1b] leading-snug">
-                  <strong>I agree to the strict Chatham House Rule:</strong> Information received during the retreat may be utilized freely, but neither the identity nor the affiliation of the speaker(s) or participants may be revealed.
-                </span>
-              </label>
-
-              <label className="flex items-start gap-3 cursor-pointer group">
-                <input
-                  type="checkbox"
-                  checked={formData.agreedDigitalDisconnect}
-                  onChange={(e) => handleInputChange('agreedDigitalDisconnect', e.target.checked)}
-                  className="mt-1 h-4 w-4 rounded-none accent-[#141e13]"
-                />
-                <span className="text-xs sm:text-sm text-[#1a1c1b] leading-snug">
-                  <strong>I agree to the Analog Quarantine:</strong> I commit to placing cellular and digital transmitters into estate lockboxes for the 72-hour duration of the convening.
+                  <strong>I agree to the Chatham House Rule:</strong> Information shared during the retreat stays confidential. You are free to use the insights, but no participant&apos;s identity or personal story may be shared outside.
                 </span>
               </label>
             </div>
 
+            {/* Target Retreat Edition Note (Dates to be announced soon) */}
             <div className="pt-2">
-              <label className="block text-[11px] font-mono uppercase tracking-wider text-[#5f5e5e] mb-1">
+              <label className="block text-[11px] font-mono uppercase tracking-wider text-[#5f5e5e] mb-1.5">
                 Target Retreat Edition
               </label>
-              <select
-                value={formData.edition}
-                onChange={(e) => handleInputChange('edition', e.target.value)}
-                className="w-full px-3.5 py-2.5 bg-[#ffffff] border border-[#c4c8c0] text-xs font-mono text-[#1a1c1b] outline-none"
-                style={{ borderRadius: 0 }}
-              >
-                <option value="October 24–26, 2024 (Kumaon Himalayas)">
-                  October 24–26, 2024 (Autumn Equinox • Kumaon Himalayas)
-                </option>
-                <option value="April 17–19, 2025 (Kumaon Himalayas)">
-                  April 17–19, 2025 (Spring Vernal • Kumaon Himalayas)
-                </option>
-                <option value="October 23–25, 2025 (Kumaon Himalayas)">
-                  October 23–25, 2025 (Autumn High Ridge • Kumaon Himalayas)
-                </option>
-              </select>
+              <div className="p-3.5 bg-[#ffffff] border border-[#c4c8c0] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                  <span className="text-xs font-mono font-semibold text-[#1a1c1b] block">
+                    Inaugural Edition
+                  </span>
+                  <span className="text-xs text-[#5f5e5e]">
+                    Near Bangalore Cohort
+                  </span>
+                </div>
+                <span className="inline-block px-3 py-1 bg-[#eeeeec] border border-[#d8d8d6] text-xs font-mono font-medium text-[#141e13]">
+                  Dates to be announced soon
+                </span>
+              </div>
+              <span className="text-[10px] font-mono text-[#757871] mt-1 block">
+                Applications received will receive primary notification and priority selection upon date finalization.
+              </span>
+            </div>
+
+            <div className="pt-2 text-xs font-mono text-[#5f5e5e] bg-[#f4f4f2] p-3 border border-[#e5e5e5]">
+              <span className="block text-[10px] text-[#757871] uppercase mb-0.5">SUBMISSION ROUTING</span>
+              All dossier data is transmitted directly to: <strong className="text-[#141e13]">thenextmileclub@gmail.com</strong>
             </div>
 
             <div className="pt-4 flex items-center justify-between">
@@ -357,7 +390,7 @@ export const InvitationModal: React.FC<InvitationModalProps> = ({ isOpen, onClos
                 }`}
                 style={{ borderRadius: 0 }}
               >
-                <span>{isSubmitting ? 'Sealing Dossier...' : 'Submit Dossier of Intent'}</span>
+                <span>{isSubmitting ? 'Submitting Dossier...' : 'Submit Dossier of Intent'}</span>
                 <CheckCircle2 size={14} />
               </button>
             </div>
@@ -376,7 +409,7 @@ export const InvitationModal: React.FC<InvitationModalProps> = ({ isOpen, onClos
 
               <div className="flex items-center gap-2 text-xs font-mono text-[#3f4a3c] mb-3">
                 <ShieldCheck size={16} />
-                <span>DOSSIER RECORD GENERATED</span>
+                <span>DOSSIER RECORD GENERATED & TRANSMITTED</span>
               </div>
 
               <h4 className="font-serif text-2xl sm:text-3xl text-[#1a1c1b] mb-1">
@@ -392,33 +425,51 @@ export const InvitationModal: React.FC<InvitationModalProps> = ({ isOpen, onClos
                   <span className="text-[#1a1c1b] font-semibold">{dossierId}</span>
                 </div>
                 <div>
-                  <span className="text-[#757871] block text-[10px]">EDITION APPLIED</span>
-                  <span className="text-[#1a1c1b] font-semibold">{formData.edition.split('(')[0]}</span>
+                  <span className="text-[#757871] block text-[10px]">EDITION</span>
+                  <span className="text-[#1a1c1b] font-semibold">Dates to be announced soon</span>
                 </div>
                 <div>
-                  <span className="text-[#757871] block text-[10px]">DISCIPLINE</span>
-                  <span className="text-[#1a1c1b] font-semibold">{formData.domain}</span>
+                  <span className="text-[#757871] block text-[10px]">TRANSMITTED TO</span>
+                  <span className="text-[#1a1c1b] font-semibold">thenextmileclub@gmail.com</span>
                 </div>
                 <div>
-                  <span className="text-[#757871] block text-[10px]">SELECTION COMMITTEE STATUS</span>
+                  <span className="text-[#757871] block text-[10px]">SELECTION STATUS</span>
                   <span className="text-[#3f4a3c] font-semibold">Under Review</span>
                 </div>
               </div>
 
-              <div className="mt-6 p-3 bg-[#ffffff] border border-[#e5e5e5] text-xs text-[#444842]">
-                <strong className="text-[#1a1c1b]">Next Step:</strong> Maya Sharma and the Next Mile selection board will review your structural inquiry. Shortlisted candidates receive a private telephone colloquium invitation within 5 business days.
+              <div className="mt-6 p-3 bg-[#ffffff] border border-[#e5e5e5] text-xs text-[#444842] space-y-2">
+                <p>
+                  <strong className="text-[#1a1c1b]">Next Step:</strong> {CONVENER_INFO.name} and the Next Mile selection board will review your structural inquiry. Shortlisted candidates receive a private colloquium invitation prior to the public announcement of dates.
+                </p>
+                <p className="text-[11px] text-[#5f5e5e]">
+                  A record of your submission has been forwarded to <strong>thenextmileclub@gmail.com</strong>.
+                </p>
               </div>
             </div>
 
             <div className="flex items-center justify-between flex-wrap gap-3 pt-2">
-              <button
-                onClick={() => window.print()}
-                className="px-4 py-2 border border-[#c4c8c0] text-xs font-mono uppercase tracking-wider text-[#5f5e5e] hover:bg-[#eeeeec] flex items-center gap-1.5"
-                style={{ borderRadius: 0 }}
-              >
-                <Printer size={13} />
-                <span>Print Dossier</span>
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => window.print()}
+                  className="px-4 py-2 border border-[#c4c8c0] text-xs font-mono uppercase tracking-wider text-[#5f5e5e] hover:bg-[#eeeeec] flex items-center gap-1.5"
+                  style={{ borderRadius: 0 }}
+                >
+                  <Printer size={13} />
+                  <span>Print Dossier</span>
+                </button>
+
+                <a
+                  href={mailtoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 border border-[#c4c8c0] text-xs font-mono uppercase tracking-wider text-[#141e13] hover:bg-[#eeeeec] flex items-center gap-1.5"
+                  style={{ borderRadius: 0 }}
+                >
+                  <Mail size={13} />
+                  <span>Open in Mail Client</span>
+                </a>
+              </div>
 
               <button
                 onClick={onClose}

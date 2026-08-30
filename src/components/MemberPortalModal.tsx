@@ -15,8 +15,8 @@ export const MemberPortalModal: React.FC<MemberPortalModalProps> = ({ isOpen, on
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Quick demo passcode: 'kumaon' or 'altitude' or allowing any 4+ char for demo
-    if (passcode.trim().toLowerCase() === 'kumaon' || passcode.trim().toLowerCase() === 'altitude' || passcode.trim().length >= 4) {
+    // Quick demo passcode: 'nextmile' or 'clarity' or allowing any 4+ char for demo
+    if (passcode.trim().toLowerCase() === 'nextmile' || passcode.trim().toLowerCase() === 'clarity' || passcode.trim().length >= 4) {
       setIsAuthenticated(true);
       setErrorMsg('');
     } else {
@@ -28,21 +28,21 @@ export const MemberPortalModal: React.FC<MemberPortalModalProps> = ({ isOpen, on
     {
       id: 'DOC-2023-A',
       title: 'Monograph: Sovereign Liquidity Routing in Adversarial Macro Regimes',
-      convening: 'Mukteshwar Autumn 2023',
+      convening: 'Cohort Archive Autumn 2023',
       classification: 'CHATHAM RESTRICTED',
       size: '2.4 MB PDF',
     },
     {
       id: 'DOC-2023-B',
       title: 'Topological Analysis: Distributed Consensus Under Sub-Millisecond Partitions',
-      convening: 'Mukteshwar Autumn 2023',
+      convening: 'Cohort Archive Autumn 2023',
       classification: 'CHATHAM RESTRICTED',
       size: '1.8 MB PDF',
     },
     {
       id: 'DOC-2024-SPR',
       title: 'The Architecture of Silence: Transcripts of Fireside Colloquium I',
-      convening: 'Mukteshwar Spring 2024',
+      convening: 'Cohort Archive Spring 2024',
       classification: 'CONFIDENTIAL // FELLOWS ONLY',
       size: '3.1 MB PDF',
     },
@@ -107,7 +107,7 @@ export const MemberPortalModal: React.FC<MemberPortalModalProps> = ({ isOpen, on
                   <p className="text-xs text-red-600 font-mono mt-1.5">{errorMsg}</p>
                 )}
                 <p className="text-[11px] text-[#757871] font-mono mt-2">
-                  Tip: Enter any passcode or <code>kumaon</code> for portal demonstration access.
+                  Tip: Enter any passcode or <code>nextmile</code> for portal demonstration access.
                 </p>
               </div>
 
@@ -127,7 +127,7 @@ export const MemberPortalModal: React.FC<MemberPortalModalProps> = ({ isOpen, on
             <div className="flex items-center justify-between pb-3 border-b border-[#e5e5e5]">
               <div>
                 <h3 className="font-serif text-2xl text-[#1a1c1b]">
-                  Sanctuary Archive & Repositories
+                  Next Mile Archive & Repositories
                 </h3>
                 <span className="text-xs font-mono text-[#3f4a3c] flex items-center gap-1 mt-0.5">
                   <ShieldCheck size={13} />

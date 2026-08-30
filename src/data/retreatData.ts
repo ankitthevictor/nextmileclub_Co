@@ -6,36 +6,39 @@ export const RETREAT_META = {
   heroEyebrow: 'THE RETREAT',
   heroHeadline: 'The Altitude of Ambition.',
   heroSubhead: 'Strategic quietude for the architectural mind.',
-  location: 'Kumaon Himalayas, India',
-  dates: 'October 24–26, 2024',
-  cohortSize: 'Strictly 14',
-  altitude: '7,200 ft (2,195 m) MSL',
-  coordinates: '29.3803° N, 79.4636° E',
-  access: 'Private helicopter transfer from Dehradun or scenic mountain drive via Pantnagar',
-  estateName: 'The High Sanctuary at Mukteshwar',
+  location: 'Near Bangalore',
+  dates: 'Dates to be announced soon',
+  cohortSize: '14–18 Curated Peers',
+  altitude: 'Private Countryside Estate',
+  coordinates: 'Near Bangalore, Karnataka',
+  access: 'Chauffeured pickup & private transfer from Bangalore',
+  estateName: 'Private Countryside Estate, near Bangalore',
   ctaText: 'REQUEST AN INVITATION',
+  emailDestination: 'thenextmileclub@gmail.com',
   images: {
-    hero: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=2000&auto=format&fit=crop', // Elegant estate lawn with warm sunlight and mountain retreat aura
-    heroAlt: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2000&auto=format&fit=crop',
-    convener: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=1200&auto=format&fit=crop', // Solitary figure on dramatic high-altitude cliff / mist
+    hero: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2400&auto=format&fit=crop',
+    heroAlt: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2400&auto=format&fit=crop',
+    convener: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1200&auto=format&fit=crop',
     estateLawn: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=1600&auto=format&fit=crop',
     library: 'https://images.unsplash.com/photo-1541123437800-1bb1317badc2?q=80&w=1600&auto=format&fit=crop',
-    himalayas: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop',
+    peaks: 'https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?q=80&w=1600&auto=format&fit=crop',
   }
 };
 
 export const CONVENER_INFO = {
-  name: 'Maya Sharma',
-  role: 'Convener & Curator, Next Mile Club',
-  background: 'Former Senior Partner, Tier-1 Strategy & Architecture Group',
-  shortBio: "Drawing from a decade in Tier-1 consultancy, Maya curates spaces that demand intellectual rigor while providing absolute sanctuary. She believes in the 'architecture of silence'—that the profoundest insights require environments stripped of digital noise and performative expectations.",
-  fullBio: `Maya Sharma spent twelve years advising Fortune 50 chief executives, enterprise architects, and foundational technology creators across North America, Europe, and Asia on capital allocation, organizational resilience, and core technological infrastructure.
+  name: 'Akanksha Sharma',
+  role: 'Convener & Founder, Next Mile Club',
+  background: 'ISB MBA • Ex-Associate Director at Meesho, Sprinklr, Accenture & Deloitte',
+  shortBio: "Akanksha Sharma has spent her career in high-velocity executive rooms where senior women are often the only one at the table. After leading teams and scaling business units across Meesho, Sprinklr, Accenture, and Deloitte, she founded Next Mile Club because the breakthroughs that truly moved her life and career never happened in conference halls—they happened in quiet, honest conversations with trusted women who had nothing to sell each other.",
+  fullBio: `Akanksha Sharma has spent over a decade in the high-stakes rooms where senior women are all too often the solitary voice at the table. An ISB MBA, she has led high-impact teams and scaled core P&Ls across Meesho, Sprinklr, Accenture, and Deloitte — most recently serving as Associate Director at Meesho.
 
-Throughout her tenure leading Tier-1 strategic advisory engagements, she identified a recurring systemic deficit: high-performing leaders rarely fail for lack of intelligence or drive; they fail because modern executive life systematically eradicates unbroken contemplative time. The constant performative velocity of modern boardrooms and public forums degrades long-horizon clarity.
+Throughout years of relentless execution, high-profile launches, and board presentations, she realized a fundamental truth that many senior leaders feel but rarely voice: as your altitude of responsibility rises, the space to be genuinely honest shrinks. You are expected to have all the answers, hold the team together, and maintain unwavering poise.
 
-In 2021, Maya founded the Next Mile Club to construct an antidote: an uncompromising high-altitude sanctuary where exactly fourteen selected peers can step outside the velocity trap. Her convenings strictly enforce the Chatham House Rule, zero presentation decks, and absolute analog disconnect, fostering discourse grounded in structural truth rather than self-promotion.`,
-  quote: "The profoundest insights require environments stripped of digital noise and performative expectations. True scale begins in silence.",
-  location: 'Kumaon, India & Geneva, Switzerland'
+The moments that truly changed her trajectory—the moments of deep clarity, unexpected courage, and career-defining decisions—never came from noisy convention centers or transactional mixers. They happened during unhurried walks in nature, around dinner tables where titles were forgotten, and among a small group of women who offered honest truth without competition.
+
+Next Mile Club is that experience, crafted with care. Small, curated cohorts of 14 to 18 women. Two unhurried days away from the everyday noise at a quiet estate near Bangalore. A safe, peaceful space where you can drop the armor, speak your truth, and gain absolute clarity on what your next mile looks like.`,
+  quote: "We spend so much time carrying everyone else's expectations that we forget to ask what we actually want to build next. True clarity begins the moment you give yourself permission to pause.",
+  location: 'Bangalore & New Delhi'
 };
 
 export const PEERS_DATA: Peer[] = [
@@ -212,96 +215,96 @@ export const PEERS_DATA: Peer[] = [
 export const ITINERARY_DATA: ItineraryDay[] = [
   {
     dayNumber: '01',
-    date: 'Thursday, October 24',
-    title: 'The Ascent & Unspooling',
-    subtitle: 'Transitioning from the noise of the plains to the silence of the high ridge.',
+    date: 'Day One',
+    title: 'The Arrival & Unburdening',
+    subtitle: 'Leaving behind the daily rush and settling into quiet countryside calm.',
     schedule: [
       {
         time: '13:00',
-        label: 'High-Altitude Arrival & Chambers Allocation',
-        description: 'Private arrival at the Mukteshwar Estate (7,200 ft). Surrender of digital transmitters into copper Faraday lockboxes. Analog journals and elevation herbal tea presented.',
+        label: 'Welcome & Settling In',
+        description: 'Arrive at the private retreat estate near Bangalore. A warm cup of local herbal tea, settling into your room, and the instant relief of being somewhere unhurried.',
         type: 'solo'
       },
       {
         time: '15:30',
-        label: 'Walk of the Cedar Canopy',
-        description: 'Silent 4-mile traverse through ancient deodar and oak forests to reset neural cadence. No conversation permitted; optical recalibration.',
+        label: 'The Nature Walk Under Tree Canopies',
+        description: 'An unhurried walk through lush greenery and open trails. Breathing in fresh air, unwinding the mental static, and resetting your internal pace.',
         type: 'solo'
       },
       {
         time: '18:00',
-        label: 'The Opening Dossier & Convening Fire',
-        description: 'Maya Sharma frames the 72-hour covenant. Formal introduction of the 14 peers with no resumes, titles, or corporate valuation metrics.',
+        label: 'The Hearth & First Names',
+        description: 'Gathering around the warm evening hearth. No stage, no presentations, and no job titles—just honest first names and the feeling that you are among kindred spirits.',
         type: 'collective'
       },
       {
         time: '19:30',
-        label: 'Himalayan Foraged Feast',
-        description: 'Kumaoni mountain table curated with cold-pressed mustard, regional grains, mountain stinging nettle, and slow-cooked earthen broths.',
+        label: 'The Long Table Dinner',
+        description: 'A slow, nourishing feast with fresh local ingredients, laughter, shared wine, and the kind of unscripted conversation that builds real trust.',
         type: 'culinary'
       }
     ]
   },
   {
     dayNumber: '02',
-    date: 'Friday, October 25',
-    title: 'The Structural Interrogation',
-    subtitle: 'Dissecting first principles without the crutch of slide decks or performative answers.',
+    date: 'Day Two',
+    title: 'Honest Conversations & Deep Clarity',
+    subtitle: 'Three intimate sessions where you can speak what is usually left unsaid and discover what truly matters.',
     schedule: [
       {
-        time: '06:30',
-        label: 'Dawn Ridge Meditation & Surya Observation',
-        description: 'Observation of the sunrise over Nanda Devi (25,643 ft) and Trishul peaks. Optional alpine breathing session.',
+        time: '07:00',
+        label: 'Morning Nature Reflection',
+        description: 'Watching the morning light break across open gardens. Freshly brewed coffee on the terrace and uninterrupted morning quiet.',
         type: 'solo'
       },
       {
         time: '08:30',
-        label: 'Colloquium I: The Anti-Fragile Core',
-        description: 'Seven peers present their core architectural paradox. 15 minutes of uninterrupted premise exposition followed by 45 minutes of rigorous dialectic.',
+        label: 'Session I: The Unspoken Weight',
+        description: 'A structured, safe space where each peer shares the real challenge, inflection point, or dilemma they have been carrying alone. Compassionate, sharp, and genuine peer insight.',
         type: 'dialogue'
       },
       {
         time: '13:00',
-        label: 'Solitary Contemplation & Forest Luncheon',
-        description: 'Independent bento baskets distributed across solitary clifftop pavilions for unbroken note-taking and cognitive synthesis.',
+        label: 'The Open Afternoon',
+        description: 'Hours with absolutely nothing scheduled. Nap, journal by the window, wander the gardens, or sit in pairs by the library.',
         type: 'solo'
       },
       {
-        time: '15:30',
-        label: 'Colloquium II: The 50-Year Horizon',
-        description: 'Second cohort session examining capital allocation, sovereign intelligence, and civilizational shock absorbers.',
+        time: '16:00',
+        label: 'Session II: The Decision You Have Been Postponing',
+        description: 'Cutting through fear and hesitation. A focused working circle to map the courageous decision that will define your next chapter.',
         type: 'dialogue'
       },
       {
         time: '20:00',
-        label: 'Chatham House Fireside Discourse',
-        description: 'Unrecorded, unmoderated roundtable around the central stone hearth. Difficult truths regarding executive isolation and architectural compromise.',
+        label: 'Fireside Sisterhood Dialogue',
+        description: 'Under the starlit sky by the crackling fire, sharing the vulnerable, unvarnished truths of ambition, leadership, family, and personal fulfillment.',
         type: 'collective'
       }
     ]
   },
   {
     dayNumber: '03',
-    date: 'Saturday, October 26',
-    title: 'Synthesis & The Descent Protocol',
-    subtitle: 'Distilling unshakeable convictions before re-entering velocity.',
+    date: 'Day Three',
+    title: 'The Written Commitment & Lifelong Allies',
+    subtitle: 'Leaving with unshakeable conviction, a handwritten compass, and women who will cheer and hold you to it.',
     schedule: [
       {
-        time: '07:00',
-        label: 'The Nanda Devi Horizon Walk',
-        description: 'High-altitude ridge walk to the ancient temple overlook. Discussion in walking pairs on personal architectural theses.',
+        time: '07:30',
+        label: 'Morning Walk in Pairs',
+        description: 'Walking side by side through the morning gardens, distilling insights with a trusted peer partner.',
         type: 'dialogue'
       },
       {
-        time: '10:00',
-        label: 'Dossier Crystallization',
-        description: 'Each peer pens their sealed "Summit Thesis"—a single page of strategic clarity committed to paper to be revisited in 12 months.',
+        time: '09:30',
+        label: 'The Handwritten Promise',
+        description: 'Putting pen to paper: committing to your core decision and priorities. A tangible anchor for the months and years ahead.',
         type: 'solo'
       },
       {
-        time: '12:30',
-        label: 'Farewell Table & Pact Exchange',
-        description: 'Final collective meal. Return of communications hardware with calibrated intention. Helicopter and chauffeured departures begin.',
+        time: '12:00',
+        label: 'Farewell Table & The Journey Ahead',
+        description: 'A celebratory final lunch together. Leaving not just with clarity of purpose, but with a lifelong circle of trusted allies.',
         type: 'culinary'
       }
     ]
@@ -311,74 +314,76 @@ export const ITINERARY_DATA: ItineraryDay[] = [
 export const PHILOSOPHY_TENETS = [
   {
     number: '01',
-    title: 'The Architecture of Silence',
-    description: 'High-velocity decision makers are bombarded with sensory clutter. True breakthroughs do not happen in the boardroom; they demand environments of radical sensory reduction.'
+    title: 'The Courage to Pause',
+    description: 'In an environment that rewards constant reactivity, choosing to step back into stillness is the ultimate act of leadership courage. When the noise stops, the right answers surface.'
   },
   {
     number: '02',
-    title: 'Zero-Performance Discourse',
-    description: 'In typical executive conferences, every statement is a performance for shareholders, investors, or subordinates. At Next Mile Club, status signaling is eliminated. We operate strictly under Chatham House rules.'
+    title: 'Dropping the Armor',
+    description: 'Senior leadership often forces you to look invulnerable. In our room, there is nothing to prove and no one to impress. Real growth and lasting clarity only begin when we allow ourselves to be authentic.'
   },
   {
     number: '03',
-    title: 'Asymmetric Altitude',
-    description: 'Physical geography dictates mental geography. At 7,200 feet, surrounded by Himalayan summits that have stood for 50 million years, transient quarterly pressures fall away, revealing enduring structural dynamics.'
+    title: 'A Breath of Fresh Air',
+    description: 'Physical space expands mental capacity. Stepping away from the daily rush into open greenery, the urgent fires of the week fade away—leaving only what truly matters.'
   },
   {
     number: '04',
-    title: 'The 14-Peer Ceiling',
-    description: 'Dunbar dynamics dictate that meaningful intellectual intimacy decays rapidly past 15 individuals. Fourteen peers ensures that everyone is an active contributor to every dialectic.'
+    title: 'A Circle That Truly Understands',
+    description: 'It can be deeply lonely when you are carrying high stakes. Gathering with 14 to 18 women who operate at the same level creates a rare bond of empathy, wisdom, and unconditional support.'
   }
 ];
 
 export const INSIGHTS_DATA: InsightArticle[] = [
   {
     id: 'insight-1',
-    number: 'MONOGRAPH 01',
-    title: 'The Architecture of Silence: Why Modern Leadership Fails in High Noise',
-    subtitle: 'An inquiry into cognitive bandwidth degradation in the 24/7 executive ecosystem.',
-    category: 'Cognitive Strategy',
-    readTime: '7 min read',
-    published: 'September 2024',
-    author: 'Maya Sharma',
+    number: 'ESSAY 01',
+    title: 'The Loneliness at the Top: Why Senior Women Need Safe Spaces',
+    subtitle: 'The unseen emotional tax of high responsibility, and why real breakthroughs happen in quiet rooms.',
+    category: 'Leadership & Belonging',
+    readTime: '6 min read',
+    published: 'Autumn 2024',
+    author: 'Akanksha Sharma',
     authorRole: 'Founder, Next Mile Club',
-    excerpt: 'The single greatest unmeasured cost in modern enterprise is the systematic eradication of unbroken contemplative time. When leaders operate at continuous 100% velocity, they optimize for the urgent at the permanent expense of the foundational.',
+    excerpt: 'When you are the leader everyone looks to for confidence, where do you go when you feel uncertain? The greatest gift a senior leader can give herself is a room of peers where she can simply exhale.',
     content: [
-      'In high-stakes corporate architecture, we frequently observe an inverse correlation between communication volume and strategic durability. The executive who answers 400 messages a day is rarely the architect who anticipates the 5-year structural shift that renders their business model obsolete.',
-      'Silence is not the absence of productivity; it is the physical space in which complex cognitive synthesis occurs. In the Himalayas, stripped of ambient pings and performative status updates, the brain down-shifts into alpha-wave reflection, enabling second- and third-order causal modeling.',
-      'Our summit protocol is specifically engineered to simulate an analog quarantine: 72 hours of uninterrupted focus to solve the one problem that actually matters.'
+      'In high-stakes corporate roles, senior women often master the art of composure. We learn to anticipate every question, manage cross-functional tensions, and navigate high-pressure rooms with seamless grace. But carrying that armor every single day comes at a quiet, unmeasured cost.',
+      'The conversations that truly transform our careers and restore our spirit are rarely found on webinar stages or crowded networking mixers. They happen when we can finally sit across from women who understand our world intimately, look each other in the eye, and speak the truth without fear of judgment.',
+      'Next Mile Club was born from the conviction that every ambitious woman deserves a peaceful retreat—a place where she can put down the weight of expectations, rediscover her own voice, and gain clarity on what she genuinely wants next.'
     ]
   },
   {
     id: 'insight-2',
-    number: 'MONOGRAPH 02',
-    title: 'The Anti-Network Protocol: Depth Over Utility',
-    subtitle: 'Why transactional networking produces superficial alliances while shared intellectual rigor creates lifelong bonds.',
-    category: 'Topological Dynamics',
-    readTime: '6 min read',
-    published: 'August 2024',
-    author: 'Sun Rong & Tracy Young',
-    authorRole: 'Next Mile Fellows',
-    excerpt: 'Traditional executive networking is fundamentally extractive: people meet to trade rolodexes and extract near-term value. Strategic quietude convenes individuals solely around the shared pursuit of architectural truth.',
+    number: 'ESSAY 02',
+    title: 'Beyond the Hamster Wheel: Redefining What Success Feels Like',
+    subtitle: 'Moving from mindless achievement to intentional fulfillment and alignment.',
+    category: 'Life & Career',
+    readTime: '5 min read',
+    published: 'Autumn 2024',
+    author: 'Next Mile Fellowship',
+    authorRole: 'Cohort Reflections',
+    excerpt: 'We often climb the career mountain so quickly that we forget to check if we actually like the view. Taking two days to evaluate your priorities is how you ensure the next mile is yours, not someone else’s.',
     content: [
-      'When you remove pitch decks, name badges, and corporate valuations from a room, what remains is the naked caliber of an individual’s mind. Ideas stand or fall on their internal mathematical coherence, not the prestige of the speaker’s title.',
-      'The bond created between 14 founders who have challenged each other’s deepest strategic assumptions by an open hearth in the Himalayas is orders of magnitude stronger than any connection forged in a conference convention hall.'
+      'It is easy to get caught in the velocity trap: hitting one milestone only to immediately sprint toward the next, driven by momentum rather than genuine desire.',
+      'When you remove yourself from the daily notifications, meetings, and obligations, a profound shift happens. You begin to separate the things you do out of habit from the things that truly bring meaning, energy, and joy.',
+      'Our retreats are designed to help you step off the treadmill, look at your career and life with open eyes, and make the courageous choices that align your daily energy with your deepest values.'
     ]
   },
   {
     id: 'insight-3',
-    number: 'MONOGRAPH 03',
-    title: 'Asymmetric Time Horizons in Capital Allocation',
-    subtitle: 'Designing sovereign balance sheets that thrive across multi-decade geopolitical shifts.',
-    category: 'Capital Systems',
-    readTime: '9 min read',
-    published: 'July 2024',
-    author: 'Julian Thorne & Astrid Lindholm',
-    authorRole: 'Macro Strategists',
-    excerpt: 'Most institutional capital operates on 90-day reporting intervals, creating massive arbitrage opportunities for those equipped with the psychological patience to operate on 20-year cycles.',
+    number: 'ESSAY 03',
+    title: 'The Power of Sisterhood at Scale',
+    subtitle: 'Why the strongest network you will ever build is a small circle of women who tell you the truth.',
+    category: 'Peer Circles',
+    readTime: '7 min read',
+    published: 'Autumn 2024',
+    author: 'Next Mile Fellowship',
+    authorRole: 'Cohort Reflections',
+    excerpt: 'Traditional networking is about collecting contacts. Authentic peer circles are about building trust. When women support each other without rivalry, exponential breakthroughs happen.',
     content: [
-      'True wealth preservation requires constructing balance sheets that do not rely on perpetual low-interest liquidity or uninterrupted global supply chains.',
-      'During our sessions in Mukteshwar, we examine the resilience of real-world energy assets, sovereign computational infrastructure, and biological longevity systems that will survive macro-prudential regime changes.'
+      'Transactional networking asks, "What can this person do for my career?" Intimate peer sisterhood asks, "Who is in your corner when the road gets steep?"',
+      'The bond forged between 14 to 18 women sharing meals, walks, and honest vulnerabilities around the hearth cannot be matched. It creates an enduring council of trusted advisors who celebrate your victories and hold your hand through transitions.',
+      'You leave the retreat not just with clearer thoughts, but with a community that remains your touchstone for years to come.'
     ]
   }
 ];

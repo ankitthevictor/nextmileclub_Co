@@ -1,39 +1,39 @@
 import React from 'react';
-import { PHILOSOPHY_TENETS, RETREAT_META } from '../data/retreatData';
-import { ShieldCheck, Compass, Anchor, Flame, ArrowRight } from 'lucide-react';
+import { PHILOSOPHY_TENETS } from '../data/retreatData';
+import { ShieldCheck, Compass, Heart, Mountain, ArrowRight } from 'lucide-react';
 
 interface PhilosophyViewProps {
   onRequestInvitation: () => void;
 }
 
 export const PhilosophyView: React.FC<PhilosophyViewProps> = ({ onRequestInvitation }) => {
-  const icons = [ShieldCheck, Compass, Anchor, Flame];
+  const icons = [Compass, ShieldCheck, Mountain, Heart];
 
   const comparisons = [
     {
-      parameter: 'Environment',
-      traditional: 'Overcrowded convention center hotel ballrooms',
-      nextMile: '7,200 ft Himalayan estate surrounded by ancient cedar forests',
+      parameter: 'Setting & Atmosphere',
+      traditional: 'Noisy hotel ballrooms & crowded convention halls',
+      nextMile: 'A peaceful private countryside estate surrounded by nature near Bangalore',
     },
     {
-      parameter: 'Discourse Mode',
-      traditional: 'Performative stage presentations & scripted pitch decks',
-      nextMile: 'Zero-deck Chatham House dialectics & rigorous peer interrogation',
+      parameter: 'Conversation Style',
+      traditional: 'Rehearsed elevator pitches & status signaling',
+      nextMile: 'Vulnerable, honest peer dialogue under first names',
     },
     {
-      parameter: 'Connectivity',
-      traditional: 'Continuous smartphone checks, live-tweeting & slack pings',
-      nextMile: 'Total analog quarantine (Faraday lockboxes & handwritten dossiers)',
+      parameter: 'Pacing & Attention',
+      traditional: 'Rushed agendas, continuous Slack pings & email checks',
+      nextMile: 'Unscripted afternoons, quiet forest walks & handwritten promises',
     },
     {
-      parameter: 'Cohort Scale',
-      traditional: 'Hundreds or thousands of badge-wearing attendees',
-      nextMile: 'Strictly 14 curated peers selected for depth of mental models',
+      parameter: 'The Room',
+      traditional: 'Hundreds of attendees with name badges',
+      nextMile: '14–18 exceptional women handpicked for depth and heart',
     },
     {
-      parameter: 'Time Horizon',
-      traditional: 'Immediate quarterly metrics & transactional exchange',
-      nextMile: 'Decadal and multi-generational architectural frameworks',
+      parameter: 'Outcome',
+      traditional: 'A stack of business cards you rarely contact',
+      nextMile: 'Lifelong allies who hold you to your commitments and cheer you on',
     },
   ];
 
@@ -42,14 +42,14 @@ export const PhilosophyView: React.FC<PhilosophyViewProps> = ({ onRequestInvitat
       <div className="max-w-[1280px] mx-auto px-6 md:px-12">
         {/* Section Header */}
         <div className="max-w-3xl mb-16">
-          <span className="text-[#5f5e5e] text-[11px] md:text-[12px] font-semibold tracking-[0.15em] uppercase font-sans mb-3 block">
-            THE MANIFESTO
+          <span className="text-[#3f4a3c] text-[11px] md:text-[12px] font-semibold tracking-[0.2em] uppercase font-mono mb-3 block">
+            THE MANIFESTO & PHILOSOPHY
           </span>
           <h2 className="text-[#1a1c1b] font-serif text-[38px] sm:text-[48px] md:text-[54px] font-normal leading-[1.08] tracking-[-0.015em]">
-            Strategic Quietude for the Architectural Mind.
+            Strategic Quietude for the Ambitious Heart.
           </h2>
           <p className="mt-6 text-[#444842] text-base sm:text-lg leading-relaxed">
-            In an era where attention is strip-mined and velocity is celebrated over direction, the rarest luxury is uninterrupted contemplative space. We built Next Mile Club as a sanctuary for foundational thinkers.
+            In a world that celebrates non-stop hustle, the rarest gift is uninterrupted space to breathe and think. We created Next Mile Club as a peaceful haven where senior women can step off the achievement treadmill, reconnect with what truly matters, and gain unshakeable clarity for their next chapter.
           </p>
         </div>
 
@@ -79,19 +79,19 @@ export const PhilosophyView: React.FC<PhilosophyViewProps> = ({ onRequestInvitat
                 </div>
 
                 <div className="mt-8 pt-4 border-t border-[#e2e3e1] flex items-center justify-between text-[11px] font-mono text-[#5f5e5e]">
-                  <span>SANCTUARY STANDARD</span>
-                  <span>ENFORCED AT 7,200 FT</span>
+                  <span>RETREAT PRINCIPLE</span>
+                  <span>NEAR BANGALORE</span>
                 </div>
               </div>
             );
           })}
         </div>
 
-        {/* The Asymmetric Contrast Table */}
+        {/* The Comparison Table */}
         <div className="mt-16 bg-[#f2f0eb] p-8 md:p-12 border border-[#e5e5e5]">
           <div className="mb-8">
             <span className="text-[11px] font-mono tracking-widest uppercase text-[#3f4a3c]">
-              STRUCTURAL DIVERGENCE
+              THE DIFFERENCE
             </span>
             <h3 className="text-2xl sm:text-3xl font-serif text-[#1a1c1b] mt-1">
               Conventional Conferences vs. Next Mile Club
@@ -102,7 +102,7 @@ export const PhilosophyView: React.FC<PhilosophyViewProps> = ({ onRequestInvitat
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="border-b border-[#c4c8c0] text-[11px] font-mono uppercase tracking-wider text-[#5f5e5e]">
-                  <th className="py-3 px-4">Dimension</th>
+                  <th className="py-3 px-4">Experience</th>
                   <th className="py-3 px-4">Typical Executive Summit</th>
                   <th className="py-3 px-4 text-[#141e13] font-semibold">Next Mile Club</th>
                 </tr>
@@ -121,14 +121,14 @@ export const PhilosophyView: React.FC<PhilosophyViewProps> = ({ onRequestInvitat
 
           <div className="mt-8 flex items-center justify-between flex-wrap gap-4 pt-6 border-t border-[#c4c8c0]">
             <p className="text-xs font-mono text-[#5f5e5e]">
-              APPLICATION IS MANDATORY FOR ATTENDANCE • ZERO PASSIVE OBSERVERS
+              CURATED COHORTS • STRICTLY 14–18 SEATS
             </p>
             <button
               onClick={onRequestInvitation}
               className="inline-flex items-center gap-2 px-6 py-3 bg-[#141e13] hover:bg-[#3f4a3c] text-[#fcfcfa] text-xs font-mono tracking-wider uppercase transition-colors"
               style={{ borderRadius: 0 }}
             >
-              <span>Request Application Dossier</span>
+              <span>Request An Invitation</span>
               <ArrowRight size={14} />
             </button>
           </div>

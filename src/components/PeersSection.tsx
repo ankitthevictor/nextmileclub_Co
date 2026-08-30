@@ -1,219 +1,162 @@
-import React, { useState } from 'react';
-import { Peer } from '../types';
-import { PEERS_DATA } from '../data/retreatData';
-import { ArrowRight, Sparkles, Filter } from 'lucide-react';
+import React from 'react';
+import { Calendar, Check, Users, Shield, Heart, Compass, Sparkles } from 'lucide-react';
 
 interface PeersSectionProps {
-  onSelectPeer: (peer: Peer) => void;
-  onOpenAllPeers: () => void;
+  onSelectPeer?: (peer: any) => void;
+  onOpenAllPeers?: () => void;
 }
 
-export const PeersSection: React.FC<PeersSectionProps> = ({ onSelectPeer, onOpenAllPeers }) => {
-  const [selectedDomain, setSelectedDomain] = useState<string>('All');
-  const [showExpandedGrid, setShowExpandedGrid] = useState<boolean>(false);
-
-  const domains = ['All', 'Enterprise Architecture', 'AI Infrastructure', 'Capital Systems', 'Deep Systems', 'Biosystems'];
-
-  const filteredPeers = selectedDomain === 'All'
-    ? PEERS_DATA
-    : PEERS_DATA.filter((p) => p.domain === selectedDomain);
-
-  // The 4 featured cards matching the screenshot layout
-  const featuredPeers = PEERS_DATA.slice(0, 4);
-
+export const PeersSection: React.FC<PeersSectionProps> = () => {
   return (
     <section
       id="peers-cohort-section"
       className="w-full py-20 md:py-28 lg:py-32 bg-[#f9f9f7] border-b border-[#e5e5e5]"
     >
       <div className="max-w-[1280px] mx-auto px-6 md:px-12">
-        {/* Top Split Layout matching the exact screenshot */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
-          {/* Left Column: Section Header */}
-          <div className="lg:col-span-5 flex flex-col justify-start">
-            <span
-              id="peers-section-label"
-              className="text-[#5f5e5e] text-[11px] md:text-[12px] font-semibold tracking-[0.15em] uppercase font-sans mb-3"
-            >
-              SECTION 01 / THE PEERS
-            </span>
-            <h2
-              id="peers-section-headline"
-              className="text-[#1a1c1b] font-serif text-[36px] sm:text-[44px] md:text-[48px] font-normal leading-[1.12] tracking-[-0.015em] max-w-md"
-            >
-              Fourteen peers. Selected for depth, not just achievement.
-            </h2>
+        {/* Top Header & Emotional Narrative */}
+        <div className="max-w-3xl mb-16 sm:mb-20">
+          <span
+            id="peers-section-label"
+            className="text-[#3f4a3c] text-[11px] md:text-[12px] font-semibold tracking-[0.2em] uppercase font-mono mb-3 block"
+          >
+            SECTION 01 / THE PEERS & THE COVENANT
+          </span>
+          <h2
+            id="peers-section-headline"
+            className="text-[#1a1c1b] font-serif text-[36px] sm:text-[46px] md:text-[52px] font-normal leading-[1.12] tracking-[-0.015em]"
+          >
+            Fourteen to eighteen senior women. In a room where nobody is performing.
+          </h2>
 
-            <p className="mt-4 text-[#444842] text-sm md:text-base leading-relaxed max-w-sm hidden md:block">
-              We curate across orthogonal disciplines—not by net worth or title, but by the structural originality of the candidate&apos;s mental models.
-            </p>
+          <p className="mt-6 text-[#444842] text-base sm:text-lg leading-relaxed">
+            When you reach senior leadership, the room gets smaller, the expectations get heavier, and the space to be genuinely vulnerable almost disappears. We don&apos;t bring women together for another corporate networking mixer or panel discussion. We convene 14 to 18 exceptional leaders who share the same unspoken pressures — to drop the armor, speak the truth, and get clear on what comes next.
+          </p>
+        </div>
 
-            <div className="mt-6 flex items-center gap-4">
-              <button
-                id="toggle-all-peers-btn"
-                onClick={() => setShowExpandedGrid(!showExpandedGrid)}
-                className="inline-flex items-center gap-2 text-xs font-mono tracking-wider uppercase text-[#141e13] hover:text-[#3f4a3c] transition-colors pb-1 border-b border-[#141e13]"
-              >
-                <span>{showExpandedGrid ? 'Show Curated View' : 'Explore All 14 Peers'}</span>
-                <ArrowRight size={13} className={showExpandedGrid ? 'rotate-90 transition-transform' : ''} />
-              </button>
+        {/* 3 Emotional Pillars of the Room */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-16 sm:mb-20">
+          {/* Pillar 1 */}
+          <div
+            id="peer-pillar-1"
+            className="bg-[#f2f0eb] p-6 sm:p-8 border border-[#e5e5e5] hover:border-[#141e13] transition-colors flex flex-col justify-between"
+            style={{ borderRadius: 0 }}
+          >
+            <div>
+              <div className="w-8 h-8 rounded-none bg-[#141e13] text-[#fcfcfa] flex items-center justify-center mb-5 font-mono text-xs">
+                01
+              </div>
+              <h3 className="font-serif text-xl sm:text-2xl text-[#1a1c1b] mb-3">
+                No Titles at the Table
+              </h3>
+              <p className="text-sm text-[#444842] leading-relaxed">
+                From the minute you arrive at the retreat, designations, investor decks, and status signaling stay outside. You are met as a thinker, a builder, and a human being.
+              </p>
+            </div>
+            <div className="pt-6 mt-6 border-t border-[#c4c8c0] text-[11px] font-mono text-[#5f5e5e] flex items-center gap-1.5">
+              <Shield size={13} className="text-[#3f4a3c]" />
+              <span>Chatham House Trust</span>
             </div>
           </div>
 
-          {/* Right Column: 4 Framed Gallery Mat Cards matching the screenshot */}
-          {!showExpandedGrid ? (
-            <div className="lg:col-span-7">
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5 sm:gap-4">
-                {/* Card 1: Sun Rong (Ergeon) */}
-                <div
-                  id="peer-frame-sun-rong"
-                  onClick={() => onSelectPeer(featuredPeers[0])}
-                  className="group cursor-pointer bg-[#eeeeec] p-2 sm:p-2.5 border border-[#e5e5e5] hover:border-[#141e13] transition-all duration-200 flex flex-col"
-                  style={{ borderRadius: 0 }}
-                >
-                  <div className="aspect-[4/4.5] w-full bg-[#f4f4f2] overflow-hidden relative">
-                    <img
-                      src={featuredPeers[0].image}
-                      alt={featuredPeers[0].name}
-                      className="w-full h-full object-cover object-center filter grayscale contrast-[1.05] group-hover:grayscale-0 transition-all duration-300"
-                      referrerPolicy="no-referrer"
-                    />
-                    <div className="absolute bottom-1.5 left-1.5 right-1.5 bg-black/65 backdrop-blur-[2px] px-1.5 py-0.5 text-[9px] text-[#fcfcfa] font-mono tracking-wider truncate">
-                      ^ ergeon
-                    </div>
-                  </div>
-                  <div className="pt-2 text-center">
-                    <p className="text-[11px] font-sans font-medium text-[#1a1c1b] truncate">
-                      {featuredPeers[0].name}
-                    </p>
-                    <p className="text-[9px] text-[#5f5e5e] font-mono truncate">
-                      {featuredPeers[0].company}
-                    </p>
-                  </div>
-                </div>
+          {/* Pillar 2 */}
+          <div
+            id="peer-pillar-2"
+            className="bg-[#f2f0eb] p-6 sm:p-8 border border-[#e5e5e5] hover:border-[#141e13] transition-colors flex flex-col justify-between"
+            style={{ borderRadius: 0 }}
+          >
+            <div>
+              <div className="w-8 h-8 rounded-none bg-[#141e13] text-[#fcfcfa] flex items-center justify-center mb-5 font-mono text-xs">
+                02
+              </div>
+              <h3 className="font-serif text-xl sm:text-2xl text-[#1a1c1b] mb-3">
+                The Decisions We Postpone
+              </h3>
+              <p className="text-sm text-[#444842] leading-relaxed">
+                Most leaders know the exact turning points they have been avoiding. Two days away from daily firefighting gives you the quiet conviction to address the choices that actually define your life.
+              </p>
+            </div>
+            <div className="pt-6 mt-6 border-t border-[#c4c8c0] text-[11px] font-mono text-[#5f5e5e] flex items-center gap-1.5">
+              <Compass size={13} className="text-[#3f4a3c]" />
+              <span>Unfiltered Clarity</span>
+            </div>
+          </div>
 
-                {/* Card 2: Tracy Young Mat Frame */}
-                <div
-                  id="peer-frame-tracy-young"
-                  onClick={() => onSelectPeer(featuredPeers[1])}
-                  className="group cursor-pointer bg-[#f4f4f2] p-3 sm:p-3.5 border border-[#e5e5e5] hover:border-[#141e13] transition-all duration-200 flex flex-col justify-between aspect-[4/5.5]"
-                  style={{ borderRadius: 0 }}
-                >
-                  <div className="h-full flex flex-col justify-center text-center px-1">
-                    <div className="w-4 h-4 mx-auto mb-2 text-[#3f4a3c] opacity-60">
-                      <Sparkles size={14} />
-                    </div>
-                    <p className="text-[11px] sm:text-[12px] font-sans text-[#1a1c1b] leading-tight font-normal">
-                      Portrait of Tracy Young, a high-caliber peer selected for the Next Mile Club cohort.
-                    </p>
-                  </div>
-                  <div className="pt-2 border-t border-[#e2e3e1] text-center">
-                    <span className="text-[9px] text-[#5f5e5e] font-mono uppercase tracking-wider">
-                      TigerEye / ex-PlanGrid
-                    </span>
-                  </div>
-                </div>
+          {/* Pillar 3 */}
+          <div
+            id="peer-pillar-3"
+            className="bg-[#f2f0eb] p-6 sm:p-8 border border-[#e5e5e5] hover:border-[#141e13] transition-colors flex flex-col justify-between"
+            style={{ borderRadius: 0 }}
+          >
+            <div>
+              <div className="w-8 h-8 rounded-none bg-[#141e13] text-[#fcfcfa] flex items-center justify-center mb-5 font-mono text-xs">
+                03
+              </div>
+              <h3 className="font-serif text-xl sm:text-2xl text-[#1a1c1b] mb-3">
+                Allies for the Next Mile
+              </h3>
+              <p className="text-sm text-[#444842] leading-relaxed">
+                A tight circle of women who understand the altitude you operate at. Peers who will celebrate your courage, tell you the unvarnished truth, and stay in your corner for years.
+              </p>
+            </div>
+            <div className="pt-6 mt-6 border-t border-[#c4c8c0] text-[11px] font-mono text-[#5f5e5e] flex items-center gap-1.5">
+              <Heart size={13} className="text-[#3f4a3c]" />
+              <span>Enduring Sisterhood</span>
+            </div>
+          </div>
+        </div>
 
-                {/* Card 3: Wei Deng Mat Frame */}
-                <div
-                  id="peer-frame-wei-deng"
-                  onClick={() => onSelectPeer(featuredPeers[2])}
-                  className="group cursor-pointer bg-[#f4f4f2] p-3 sm:p-3.5 border border-[#e5e5e5] hover:border-[#141e13] transition-all duration-200 flex flex-col justify-between aspect-[4/5.5]"
-                  style={{ borderRadius: 0 }}
-                >
-                  <div className="h-full flex flex-col justify-center text-center px-1">
-                    <div className="w-4 h-4 mx-auto mb-2 text-[#3f4a3c] opacity-60">
-                      <Sparkles size={14} />
-                    </div>
-                    <p className="text-[11px] sm:text-[12px] font-sans text-[#1a1c1b] leading-tight font-normal">
-                      Portrait of Wei Deng, a high-caliber peer selected for the Next Mile Club cohort.
-                    </p>
-                  </div>
-                  <div className="pt-2 border-t border-[#e2e3e1] text-center">
-                    <span className="text-[9px] text-[#5f5e5e] font-mono uppercase tracking-wider">
-                      Clipper Systems
-                    </span>
-                  </div>
-                </div>
+        {/* WHAT TO EXPECT - The Main Experiential Card */}
+        <div
+          id="what-to-expect-section"
+          className="pt-4"
+        >
+          <div className="bg-[#f2f0eb] border border-[#141e13] p-8 sm:p-12 md:p-14 relative overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
+            {/* Top Eyebrow */}
+            <div className="flex items-center gap-3 mb-6">
+              <span className="text-[11px] sm:text-[12px] font-mono uppercase tracking-[0.25em] text-[#3f4a3c] font-semibold">
+                WHAT TO EXPECT
+              </span>
+              <div className="h-[1px] flex-1 bg-[#c4c8c0]" />
+            </div>
 
-                {/* Card 4: Elena Rostova Portrait Frame */}
-                <div
-                  id="peer-frame-elena-rostova"
-                  onClick={() => onSelectPeer(featuredPeers[3])}
-                  className="group cursor-pointer bg-[#eeeeec] p-2 sm:p-2.5 border border-[#e5e5e5] hover:border-[#141e13] transition-all duration-200 flex flex-col"
-                  style={{ borderRadius: 0 }}
-                >
-                  <div className="aspect-[4/4.5] w-full bg-[#f4f4f2] overflow-hidden relative">
-                    <img
-                      src={featuredPeers[3].image}
-                      alt={featuredPeers[3].name}
-                      className="w-full h-full object-cover object-center filter grayscale contrast-[1.05] group-hover:grayscale-0 transition-all duration-300"
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
-                  <div className="pt-2 text-center">
-                    <p className="text-[11px] font-sans font-medium text-[#1a1c1b] truncate">
-                      {featuredPeers[3].name}
-                    </p>
-                    <p className="text-[9px] text-[#5f5e5e] font-mono truncate">
-                      {featuredPeers[3].company}
-                    </p>
-                  </div>
-                </div>
+            {/* Main Headline */}
+            <h3 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#1a1c1b] font-normal tracking-[-0.015em] mb-6 sm:mb-8 leading-tight">
+              People. Two days. One decision each.
+            </h3>
+
+            {/* Narrative Paragraphs */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 text-[#2f3130] text-base sm:text-lg leading-relaxed">
+              <div className="space-y-4">
+                <p className="font-normal">
+                  No stage, no panel, no name tags. Three working sessions where you do the talking. Afternoons with nothing on them. Shared rooms, shared table, first names from the first minute.
+                </p>
+                <p className="text-sm text-[#5f5e5e] leading-relaxed">
+                  You step away from the relentless cycle of meetings and pings into calm countryside air, surrounded by peers who listen with full presence and genuine empathy.
+                </p>
               </div>
 
-              {/* Sub-caption matching gallery aesthetic */}
-              <div className="mt-4 flex items-center justify-between text-[11px] text-[#5f5e5e] font-mono">
-                <span>FOUR OF FOURTEEN CONFIRMED ATTENDEES</span>
-                <span className="text-[#3f4a3c]">CLICK TO VIEW DOSSIER</span>
+              <div className="space-y-4 flex flex-col justify-between">
+                <p className="font-normal font-serif italic text-lg sm:text-xl text-[#1a1c1b] border-l-2 border-[#141e13] pl-4 py-1">
+                  &ldquo;You leave with a commitment in your own handwriting — and thirteen women who will ask you about it six months from now.&rdquo;
+                </p>
+
+                <div className="pt-4 flex items-center gap-6 text-xs font-mono text-[#5f5e5e] flex-wrap">
+                  <span className="flex items-center gap-1.5">
+                    <Users size={14} className="text-[#3f4a3c]" />
+                    14–18 Peers
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <Calendar size={14} className="text-[#3f4a3c]" />
+                    2 Days
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <Check size={14} className="text-[#3f4a3c]" />
+                    1 Decision Each
+                  </span>
+                </div>
               </div>
             </div>
-          ) : (
-            /* Expanded Full 14 Cohort Grid */
-            <div className="lg:col-span-7">
-              {/* Filter pills */}
-              <div className="flex flex-wrap gap-2 mb-6 pb-3 border-b border-[#e5e5e5]">
-                {domains.map((d) => (
-                  <button
-                    key={d}
-                    onClick={() => setSelectedDomain(d)}
-                    className={`px-3 py-1 text-[11px] font-mono uppercase tracking-wider transition-colors ${
-                      selectedDomain === d
-                        ? 'bg-[#141e13] text-[#fcfcfa]'
-                        : 'bg-[#eeeeec] text-[#444842] hover:bg-[#e2e3e1]'
-                    }`}
-                    style={{ borderRadius: 0 }}
-                  >
-                    {d}
-                  </button>
-                ))}
-              </div>
-
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3.5 max-h-[520px] overflow-y-auto pr-1">
-                {filteredPeers.map((peer) => (
-                  <div
-                    key={peer.id}
-                    id={`peer-card-${peer.id}`}
-                    onClick={() => onSelectPeer(peer)}
-                    className="group cursor-pointer bg-[#f4f4f2] p-2.5 border border-[#e5e5e5] hover:border-[#141e13] transition-all flex flex-col"
-                    style={{ borderRadius: 0 }}
-                  >
-                    <div className="aspect-square w-full bg-[#e8e8e6] overflow-hidden mb-2">
-                      <img
-                        src={peer.image}
-                        alt={peer.name}
-                        className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300"
-                        referrerPolicy="no-referrer"
-                      />
-                    </div>
-                    <h4 className="text-xs font-sans font-medium text-[#1a1c1b] truncate">{peer.name}</h4>
-                    <p className="text-[10px] text-[#5f5e5e] font-mono truncate">{peer.company}</p>
-                    <span className="mt-1 text-[9px] text-[#3f4a3c] font-mono uppercase truncate">{peer.domain}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+          </div>
         </div>
       </div>
     </section>

@@ -71,7 +71,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPortal, onNavigateHome }) 
             </button>
 
             <h3 className="font-serif text-2xl text-[#1a1c1b] mb-4">
-              {legalModal === 'privacy' ? 'Privacy Policy & Data Sanctuary' : 'Terms of Service & Chatham House Covenant'}
+              {legalModal === 'privacy' ? 'Privacy Policy & Data Security' : 'Terms of Service & Chatham House Covenant'}
             </h3>
 
             <div className="text-xs sm:text-sm text-[#444842] space-y-3 leading-relaxed font-sans">
@@ -81,7 +81,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPortal, onNavigateHome }) 
                     <strong>Zero Digital Tracking:</strong> Next Mile Club maintains an uncompromising data minimization standard. We do not employ third-party behavioral trackers, algorithmic ad cookies, or commercial marketing telemetry.
                   </p>
                   <p>
-                    <strong>Confidential Candidate Records:</strong> Dossiers submitted via our invitation portal are reviewed exclusively by Maya Sharma and our confidential admissions board. Records are encrypted and never sold, shared, or indexed by search engines.
+                    <strong>Confidential Candidate Records:</strong> Dossiers submitted via our invitation portal are reviewed exclusively by Akanksha Sharma and our confidential admissions board. Records are encrypted and never sold, shared, or indexed by search engines.
                   </p>
                 </>
               ) : (
@@ -90,7 +90,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPortal, onNavigateHome }) 
                     <strong>Chatham House Covenant:</strong> All attendees of Next Mile Club summits agree unconditionally that while information shared may be utilized for individual strategic development, no quotes, attributions, or identities may ever be revealed publicly.
                   </p>
                   <p>
-                    <strong>Analog Sanctity:</strong> Unauthorized recording devices, optical drones, and cellular broadcasting are strictly barred from the Mukteshwar estate during active convening hours.
+                    <strong>Safe Space:</strong> Unauthorized recording devices, cameras, and public live streaming are strictly barred during active retreat sessions.
                   </p>
                 </>
               )}

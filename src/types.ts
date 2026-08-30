@@ -43,10 +43,10 @@ export interface InvitationApplication {
   email: string;
   organization: string;
   role: string;
-  domain: string;
+  linkedinUrl: string;
   bandwidthQuestion: string;
-  solitudeStatement: string;
+  lookingFor: string;
+  topPriorities: string;
   agreedChathamHouse: boolean;
-  agreedDigitalDisconnect: boolean;
   edition: string;
 }
