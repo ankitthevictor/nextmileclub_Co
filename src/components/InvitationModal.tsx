@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { InvitationApplication } from '../types';
 import { RETREAT_META, CONVENER_INFO } from '../data/retreatData';
-import { X, CheckCircle2, ShieldCheck, ArrowRight, ArrowLeft, Stamp, Printer, Mail, Linkedin, ExternalLink } from 'lucide-react';
+import { X, CheckCircle2, ShieldCheck, ArrowRight, ArrowLeft, Stamp, Printer, Mail, Linkedin, ExternalLink, Copy, Check, AlertCircle, Send } from 'lucide-react';
 
 interface InvitationModalProps {
   isOpen: boolean;
@@ -25,6 +25,8 @@ export const InvitationModal: React.FC<InvitationModalProps> = ({ isOpen, onClos
   const [dossierId, setDossierId] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [submittedTime, setSubmittedTime] = useState<string>('');
+  const [transmissionStatus, setTransmissionStatus] = useState<'idle' | 'sent' | 'fallback'>('idle');
+  const [copied, setCopied] = useState<boolean>(false);
 
   if (!isOpen) return null;
 
@@ -32,20 +34,72 @@ export const InvitationModal: React.FC<InvitationModalProps> = ({ isOpen, onClos
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleNext = (e: React.FormEvent) => {
+  const handleNext = async (e: React.FormEvent) => {
     e.preventDefault();
     if (currentStep < 3) {
       setCurrentStep((prev) => prev + 1);
     } else {
-      // Final submission to thenextmileclub@gmail.com
+      // Final real submission to thenextmileclub@gmail.com
       setIsSubmitting(true);
-      setTimeout(() => {
-        const randomCode = `NMC-${Math.floor(1000 + Math.random() * 9000)}-${formData.organization ? formData.organization.replace(/[^a-zA-Z]/g, '').substring(0, 3).toUpperCase() : 'SEL'}`;
-        setDossierId(randomCode);
-        setSubmittedTime(new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }));
+      const randomCode = `NMC-${Math.floor(1000 + Math.random() * 9000)}-${formData.organization ? formData.organization.replace(/[^a-zA-Z]/g, '').substring(0, 3).toUpperCase() : 'SEL'}`;
+      setDossierId(randomCode);
+      const dateStr = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      setSubmittedTime(dateStr);
+
+      // Save locally to localStorage as instant client-side durable record
+      try {
+        const stored = localStorage.getItem('nmc_dossiers') || '[]';
+        const parsed = JSON.parse(stored);
+        parsed.unshift({
+          id: randomCode,
+          submittedAt: new Date().toISOString(),
+          data: formData,
+        });
+        localStorage.setItem('nmc_dossiers', JSON.stringify(parsed));
+      } catch (err) {
+        console.warn('Local storage write warning:', err);
+      }
+
+      // Real email transmission to thenextmileclub@gmail.com via FormSubmit AJAX service
+      try {
+        const response = await fetch(`https://formsubmit.co/ajax/${RETREAT_META.emailDestination}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: JSON.stringify({
+            _subject: `New Next Mile Club Application: ${formData.fullName} (${formData.role}, ${formData.organization})`,
+            _template: 'table',
+            _captcha: 'false',
+            _replyto: formData.email,
+            'Applicant Name': formData.fullName,
+            'Applicant Email': formData.email,
+            'Organization / Company': formData.organization,
+            'Designation / Role': formData.role,
+            'LinkedIn Profile URL': formData.linkedinUrl,
+            '1. Core Problem & Bandwidth Question': formData.bandwidthQuestion,
+            '2. What Looking For From Next Mile Club': formData.lookingFor,
+            '3. Top 3 Life Priorities Right Now': formData.topPriorities,
+            'Target Edition': formData.edition,
+            'Chatham House Covenant': 'Agreed unconditionally',
+            'Dossier Verification ID': randomCode,
+            'Submission Date': dateStr,
+          }),
+        });
+
+        if (response.ok) {
+          setTransmissionStatus('sent');
+        } else {
+          setTransmissionStatus('fallback');
+        }
+      } catch (error) {
+        console.warn('FormSubmit transmission error, switching to fallback:', error);
+        setTransmissionStatus('fallback');
+      } finally {
         setIsSubmitting(false);
         setCurrentStep(4);
-      }, 600);
+      }
     }
   };
 
@@ -69,24 +123,36 @@ export const InvitationModal: React.FC<InvitationModalProps> = ({ isOpen, onClos
 
   const isStep3Valid = formData.agreedChathamHouse;
 
-  // Prepare email payload for thenextmileclub@gmail.com
-  const emailSubject = encodeURIComponent(`Next Mile Club Application - ${formData.fullName} (${formData.organization})`);
-  const emailBody = encodeURIComponent(
-    `Candidate Dossier of Intent\n` +
-    `---------------------------------------\n` +
+  // Prepare full formatted text for email and copy
+  const rawApplicationText =
+    `NEXT MILE CLUB - CANDIDATE DOSSIER OF INTENT\n` +
+    `Verification ID: ${dossierId}\n` +
+    `Date: ${submittedTime || new Date().toLocaleDateString()}\n` +
+    `--------------------------------------------------\n` +
+    `APPLICANT PROFILE\n` +
     `Full Name: ${formData.fullName}\n` +
     `Email: ${formData.email}\n` +
     `Organization: ${formData.organization}\n` +
-    `Role / Title: ${formData.role}\n` +
+    `Role / Designation: ${formData.role}\n` +
     `LinkedIn Profile: ${formData.linkedinUrl}\n\n` +
-    `1. Cognitive Bandwidth & Core Problem:\n${formData.bandwidthQuestion}\n\n` +
-    `2. What You Are Looking For From This Club:\n${formData.lookingFor}\n\n` +
+    `INTENT & INQUIRIES\n` +
+    `1. What brings you to Next Mile Club / Core Challenge:\n${formData.bandwidthQuestion}\n\n` +
+    `2. What You Are Looking For From This Peer Circle:\n${formData.lookingFor}\n\n` +
     `3. Top 3 Priorities in Life Right Now:\n${formData.topPriorities}\n\n` +
-    `Edition: ${formData.edition}\n` +
-    `Chatham House Rule Agreed: Yes\n` +
-    `Target Email: ${RETREAT_META.emailDestination}\n`
-  );
+    `AGREEMENTS\n` +
+    `Target Edition: ${formData.edition} (Near Bangalore)\n` +
+    `Chatham House Rule: Agreed\n` +
+    `Recipient: ${RETREAT_META.emailDestination}\n`;
+
+  const emailSubject = encodeURIComponent(`Next Mile Club Application - ${formData.fullName} (${formData.organization})`);
+  const emailBody = encodeURIComponent(rawApplicationText);
   const mailtoUrl = `mailto:${RETREAT_META.emailDestination}?subject=${emailSubject}&body=${emailBody}`;
+
+  const handleCopyText = () => {
+    navigator.clipboard.writeText(rawApplicationText);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
+  };
 
   return (
     <div
@@ -438,45 +504,78 @@ export const InvitationModal: React.FC<InvitationModalProps> = ({ isOpen, onClos
                 </div>
               </div>
 
-              <div className="mt-6 p-3 bg-[#ffffff] border border-[#e5e5e5] text-xs text-[#444842] space-y-2">
-                <p>
-                  <strong className="text-[#1a1c1b]">Next Step:</strong> {CONVENER_INFO.name} and the Next Mile selection board will review your structural inquiry. Shortlisted candidates receive a private colloquium invitation prior to the public announcement of dates.
-                </p>
-                <p className="text-[11px] text-[#5f5e5e]">
-                  A record of your submission has been forwarded to <strong>thenextmileclub@gmail.com</strong>.
+              <div className="mt-6 p-4 bg-[#ffffff] border border-[#e5e5e5] text-xs text-[#444842] space-y-3">
+                {transmissionStatus === 'sent' ? (
+                  <div className="flex items-start gap-2 text-[#2b4c2b] bg-[#eef7ee] p-3 border border-[#c3e6c3]">
+                    <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-[#2b4c2b]" />
+                    <div>
+                      <p className="font-semibold font-mono text-[11px] uppercase tracking-wider">
+                        Transmission Successful
+                      </p>
+                      <p className="text-xs text-[#2b4c2b] mt-0.5">
+                        Your application has been routed directly to <strong className="font-mono">thenextmileclub@gmail.com</strong>.
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex items-start gap-2 text-[#61451e] bg-[#fbf5eb] p-3 border border-[#ebd8b7]">
+                    <AlertCircle size={16} className="mt-0.5 shrink-0 text-[#825d25]" />
+                    <div>
+                      <p className="font-semibold font-mono text-[11px] uppercase tracking-wider">
+                        Direct Delivery & Backup
+                      </p>
+                      <p className="text-xs text-[#61451e] mt-0.5">
+                        Your application is saved. You can also click <strong>&ldquo;Send via Email App&rdquo;</strong> below or copy the formatted text to send directly to <strong className="font-mono">thenextmileclub@gmail.com</strong>.
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                <p className="text-xs leading-relaxed">
+                  <strong className="text-[#1a1c1b]">Next Steps:</strong> {CONVENER_INFO.name} and the Next Mile selection board will review your profile. Shortlisted candidates will receive private correspondence prior to the public announcement of dates.
                 </p>
               </div>
             </div>
 
             <div className="flex items-center justify-between flex-wrap gap-3 pt-2">
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => window.print()}
-                  className="px-4 py-2 border border-[#c4c8c0] text-xs font-mono uppercase tracking-wider text-[#5f5e5e] hover:bg-[#eeeeec] flex items-center gap-1.5"
-                  style={{ borderRadius: 0 }}
-                >
-                  <Printer size={13} />
-                  <span>Print Dossier</span>
-                </button>
-
+              <div className="flex items-center gap-2 flex-wrap">
                 <a
                   href={mailtoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2 border border-[#c4c8c0] text-xs font-mono uppercase tracking-wider text-[#141e13] hover:bg-[#eeeeec] flex items-center gap-1.5"
+                  className="px-4 py-2.5 bg-[#141e13] text-[#fcfcfa] hover:bg-[#3f4a3c] text-xs font-mono uppercase tracking-wider flex items-center gap-1.5 transition-colors"
                   style={{ borderRadius: 0 }}
                 >
-                  <Mail size={13} />
-                  <span>Open in Mail Client</span>
+                  <Send size={13} />
+                  <span>Send via Email App</span>
                 </a>
+
+                <button
+                  type="button"
+                  onClick={handleCopyText}
+                  className="px-4 py-2.5 border border-[#c4c8c0] text-xs font-mono uppercase tracking-wider text-[#141e13] hover:bg-[#eeeeec] flex items-center gap-1.5 transition-colors"
+                  style={{ borderRadius: 0 }}
+                >
+                  {copied ? <Check size={13} className="text-green-700" /> : <Copy size={13} />}
+                  <span>{copied ? 'Copied to Clipboard' : 'Copy Application Text'}</span>
+                </button>
+
+                <button
+                  onClick={() => window.print()}
+                  className="px-4 py-2.5 border border-[#c4c8c0] text-xs font-mono uppercase tracking-wider text-[#5f5e5e] hover:bg-[#eeeeec] flex items-center gap-1.5"
+                  style={{ borderRadius: 0 }}
+                >
+                  <Printer size={13} />
+                  <span>Print</span>
+                </button>
               </div>
 
               <button
                 onClick={onClose}
-                className="px-6 py-2.5 bg-[#141e13] hover:bg-[#3f4a3c] text-[#fcfcfa] text-xs font-mono uppercase tracking-wider transition-colors"
+                className="px-6 py-2.5 bg-[#e5e5e0] hover:bg-[#d8d8d2] text-[#141e13] text-xs font-mono uppercase tracking-wider transition-colors"
                 style={{ borderRadius: 0 }}
               >
-                Done
+                Close
               </button>
             </div>
           </div>
